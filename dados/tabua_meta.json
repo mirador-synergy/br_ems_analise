@@ -1,0 +1,226 @@
+{
+  "BR-EMSsb-2026-M": {
+    "label": "BR-EMSsb 2026 (M)",
+    "color": "#FF7000",
+    "group": "BR-EMS",
+    "version": "2026",
+    "tipo": "sb",
+    "sex": "M"
+  },
+  "BR-EMSsb-2026-F": {
+    "label": "BR-EMSsb 2026 (F)",
+    "color": "#FF9A40",
+    "group": "BR-EMS",
+    "version": "2026",
+    "tipo": "sb",
+    "sex": "F"
+  },
+  "BR-EMSmt-2026-M": {
+    "label": "BR-EMSmt 2026 (M)",
+    "color": "#2E4057",
+    "group": "BR-EMS",
+    "version": "2026",
+    "tipo": "mt",
+    "sex": "M"
+  },
+  "BR-EMSmt-2026-F": {
+    "label": "BR-EMSmt 2026 (F)",
+    "color": "#5C7A9E",
+    "group": "BR-EMS",
+    "version": "2026",
+    "tipo": "mt",
+    "sex": "F"
+  },
+  "BR-EMSsb-2021-M": {
+    "label": "BR-EMSsb 2021 (M)",
+    "color": "#E3B23C",
+    "group": "BR-EMS",
+    "version": "2021",
+    "tipo": "sb",
+    "sex": "M"
+  },
+  "BR-EMSsb-2021-F": {
+    "label": "BR-EMSsb 2021 (F)",
+    "color": "#EFC96A",
+    "group": "BR-EMS",
+    "version": "2021",
+    "tipo": "sb",
+    "sex": "F"
+  },
+  "BR-EMSmt-2021-M": {
+    "label": "BR-EMSmt 2021 (M)",
+    "color": "#7F8C8D",
+    "group": "BR-EMS",
+    "version": "2021",
+    "tipo": "mt",
+    "sex": "M"
+  },
+  "BR-EMSmt-2021-F": {
+    "label": "BR-EMSmt 2021 (F)",
+    "color": "#A0B9A2",
+    "group": "BR-EMS",
+    "version": "2021",
+    "tipo": "mt",
+    "sex": "F"
+  },
+  "BR-EMSsb-2015-M": {
+    "label": "BR-EMSsb 2015 (M)",
+    "color": "#6B2D5E",
+    "group": "BR-EMS",
+    "version": "2015",
+    "tipo": "sb",
+    "sex": "M"
+  },
+  "BR-EMSsb-2015-F": {
+    "label": "BR-EMSsb 2015 (F)",
+    "color": "#9B5E8D",
+    "group": "BR-EMS",
+    "version": "2015",
+    "tipo": "sb",
+    "sex": "F"
+  },
+  "BR-EMSmt-2015-M": {
+    "label": "BR-EMSmt 2015 (M)",
+    "color": "#4A4A4A",
+    "group": "BR-EMS",
+    "version": "2015",
+    "tipo": "mt",
+    "sex": "M"
+  },
+  "BR-EMSmt-2015-F": {
+    "label": "BR-EMSmt 2015 (F)",
+    "color": "#8A8A8A",
+    "group": "BR-EMS",
+    "version": "2015",
+    "tipo": "mt",
+    "sex": "F"
+  },
+  "BR-EMSsb-2010-M": {
+    "label": "BR-EMSsb 2010 (M)",
+    "color": "#B0B0B0",
+    "group": "BR-EMS",
+    "version": "2010",
+    "tipo": "sb",
+    "sex": "M"
+  },
+  "BR-EMSsb-2010-F": {
+    "label": "BR-EMSsb 2010 (F)",
+    "color": "#CACACA",
+    "group": "BR-EMS",
+    "version": "2010",
+    "tipo": "sb",
+    "sex": "F"
+  },
+  "BR-EMSmt-2010-M": {
+    "label": "BR-EMSmt 2010 (M)",
+    "color": "#888888",
+    "group": "BR-EMS",
+    "version": "2010",
+    "tipo": "mt",
+    "sex": "M"
+  },
+  "BR-EMSmt-2010-F": {
+    "label": "BR-EMSmt 2010 (F)",
+    "color": "#AAAAAA",
+    "group": "BR-EMS",
+    "version": "2010",
+    "tipo": "mt",
+    "sex": "F"
+  },
+  "AT2000-Basica-M": {
+    "label": "AT-2000 Básica (M)",
+    "color": "#C0392B",
+    "group": "Mercado",
+    "sex": "M"
+  },
+  "AT2000-Basica-F": {
+    "label": "AT-2000 Básica (F)",
+    "color": "#E57373",
+    "group": "Mercado",
+    "sex": "F"
+  },
+  "AT2000-Suav10-M": {
+    "label": "AT-2000 Suav. 10% (M)",
+    "color": "#E05102",
+    "group": "Mercado",
+    "sex": "M"
+  },
+  "AT2000-Suav10-F": {
+    "label": "AT-2000 Suav. 10% (F)",
+    "color": "#FF8A65",
+    "group": "Mercado",
+    "sex": "F"
+  },
+  "AT2012-Basica-M": {
+    "label": "AT-2012 Básica (M)",
+    "color": "#1B7A4D",
+    "group": "Mercado",
+    "sex": "M"
+  },
+  "AT2012-Basica-F": {
+    "label": "AT-2012 Básica (F)",
+    "color": "#4CAF82",
+    "group": "Mercado",
+    "sex": "F"
+  },
+  "AT83-Basica-M": {
+    "label": "AT-83 Básica (M)",
+    "color": "#6B4226",
+    "group": "Mercado",
+    "sex": "M"
+  },
+  "AT83-Basica-F": {
+    "label": "AT-83 Básica (F)",
+    "color": "#A07850",
+    "group": "Mercado",
+    "sex": "F"
+  },
+  "AT83-IAM-M": {
+    "label": "AT-83 IAM (M)",
+    "color": "#795548",
+    "group": "Mercado",
+    "sex": "M"
+  },
+  "AT83-IAM-F": {
+    "label": "AT-83 IAM (F)",
+    "color": "#A1887F",
+    "group": "Mercado",
+    "sex": "F"
+  },
+  "CPM2014-M": {
+    "label": "CPM 2014 (M)",
+    "color": "#0277BD",
+    "group": "Mercado",
+    "sex": "M"
+  },
+  "CPM2014-F": {
+    "label": "CPM 2014 (F)",
+    "color": "#4FC3F7",
+    "group": "Mercado",
+    "sex": "F"
+  },
+  "RP2000-M": {
+    "label": "RP-2000 (M)",
+    "color": "#6A1B9A",
+    "group": "Mercado",
+    "sex": "M"
+  },
+  "RP2000-F": {
+    "label": "RP-2000 (F)",
+    "color": "#AB47BC",
+    "group": "Mercado",
+    "sex": "F"
+  },
+  "UP94-M": {
+    "label": "UP-94 (M)",
+    "color": "#00695C",
+    "group": "Mercado",
+    "sex": "M"
+  },
+  "UP94-F": {
+    "label": "UP-94 (F)",
+    "color": "#4DB6AC",
+    "group": "Mercado",
+    "sex": "F"
+  }
+}
