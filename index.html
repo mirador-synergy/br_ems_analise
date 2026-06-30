@@ -5,7 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BR-EMS 2026 — Análise de Tábuas Biométricas | Mirador Atuarial</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="description" content="Análise interativa das tábuas biométricas BR-EMS 2026 (sobrevivência e mortalidade). Compare versões, explore qx por idade, estime impacto em prêmios de seguro de vida e anuidades previdenciárias.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BR-EMS 2026 — Análise de Tábuas Biométricas | Mirador Atuarial">
+<meta property="og:description" content="Painel técnico com as novas tábuas biométricas BR-EMS 2026. Vigência 01/07/2026. Compare versões, analise expectativas de vida e estime o impacto em benefícios previdenciários.">
+<meta property="og:url" content="https://brems-2026.mirador360.com.br">
+<link rel="canonical" href="https://brems-2026.mirador360.com.br">
 <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
@@ -164,7 +170,8 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
 
 /* ── INSIGHT ──────────────────────────────────────────────────────────── */
 .insight-box{background:var(--mi-orange-50);border-left:4px solid var(--mi-orange);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:12px 15px;margin-bottom:9px;font-size:.85rem;line-height:1.55}
-.insight-box strong{font-family:var(--font-d);font-size:.9rem;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:2px}
+.insight-box strong{font-weight:700}
+.insight-box > strong:first-child{font-family:var(--font-d);font-size:.9rem;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:4px}
 
 /* ── DISCLAIMER ───────────────────────────────────────────────────────── */
 .disclaimer{background:var(--mi-ink-100);border:1px solid var(--mi-ink-200);border-radius:var(--r-md);padding:14px 18px;font-size:.78rem;color:var(--fg-3);line-height:1.6;margin-top:32px}
@@ -233,13 +240,10 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
     <a class="nav-link" href="#versoes">Versões BR-EMS</a>
     <a class="nav-link" href="#mercado">Mercado</a>
     <a class="nav-link" href="#tabela-qx">Tabela qx</a>
-    <a class="nav-link" href="#expectativa">Expectativa</a>
-    <a class="nav-link" href="#impacto">Impacto por Idade</a>
+    <a class="nav-link" href="#impacto">Análise por Idade</a>
     <a class="nav-link" href="#comparacao-atualizacao">Comparação 2015→2026</a>
     <a class="nav-link" href="#beneficios">Benefícios</a>
     <a class="nav-link" href="#grupo">Perfil do Grupo</a>
-    <a class="nav-link" href="#matriz">Matriz</a>
-    <a class="nav-link" href="#dashboard">Dashboard</a>
     <a class="nav-link" href="#metodologia">Metodologia</a>
   </div>
   <div class="nav-right">
@@ -263,7 +267,7 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
     <div class="hero-badges">
       <span class="hbadge orange">BR-EMSsb · Sobrevivência</span>
       <span class="hbadge orange">BR-EMSmt · Mortalidade</span>
-      <span class="hbadge">25+ tábuas para comparações</span>
+      <span class="hbadge">30+ tábuas disponíveis</span>
     </div>
     <div class="hero-actions">
       <button class="btn-hero-dl" onclick="dl2026()">
@@ -304,7 +308,7 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
 <!-- S2 · VERSÕES BR-EMS -->
 <section class="section section-alt" id="versoes">
   <div class="section-inner">
-    <div class="eyebrow">Seção 2 · Comparação</div>
+    <div class="eyebrow">Seção 1 · Comparação</div>
     <h2 class="section-title">Evolução das versões BR-EMS</h2>
     <p class="section-desc">Compare probabilidade de óbito (qx), sobreviventes (lx) e expectativa de vida (ex) nas versões 2010, 2015, 2021 e 2026, por tipo de tábua e sexo.</p>
     <div class="ctrl-row">
@@ -345,13 +349,14 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
       <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Heatmap qx — 2026 vs 2021</div><div id="chartVHeat" style="height:310px"></div></div>
     </div>
     <div class="kpi-grid" style="margin-top:20px" id="kpiVersoes"></div>
+    <p id="versoesTxt" style="margin-top:18px;font-size:.88rem;line-height:1.7;color:var(--fg-2)"></p>
   </div>
 </section>
 
 <!-- S3 · MERCADO -->
 <section class="section" id="mercado">
   <div class="section-inner">
-    <div class="eyebrow">Seção 3 · Comparação</div>
+    <div class="eyebrow">Seção 2 · Comparação</div>
     <h2 class="section-title">BR-EMS 2026 vs. tábuas de mercado</h2>
     <p class="section-desc">Compare a BR-EMS 2026 com AT-2000, AT-2012, AT-83, CPM-2014, RP-2000 e UP-94. Ranking de conservadorismo para passivos previdenciários.</p>
     <div class="ctrl-row">
@@ -374,21 +379,22 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
       <div class="card" style="height:100%">
         <div class="card-title">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-          Ranking · conservadorismo a 65 anos
+          Ranking · conservadorismo aos 65 anos
         </div>
         <p style="font-size:.72rem;color:var(--fg-3);margin-bottom:12px">Menor qx₆₅ = maior longevidade esperada = mais conservador para passivos de anuidade</p>
         <table class="rtable" id="rankTable"></table>
       </div>
     </div>
+    <div id="mktInsights" style="margin-top:24px"></div>
   </div>
 </section>
 
 <!-- S4 · TABELA QX -->
 <section class="section section-alt" id="tabela-qx">
   <div class="section-inner">
-    <div class="eyebrow">Seção 4 · Dados</div>
+    <div class="eyebrow">Seção 3 · Dados</div>
     <h2 class="section-title">Tabela de qx por idade</h2>
-    <p class="section-desc">Consulte os valores de probabilidade de óbito (qx) por idade para as tábuas selecionadas. Faça download em CSV, XLSX ou JSON.</p>
+    <p class="section-desc">Consulte os valores de probabilidade de óbito (qx), sobreviventes (lx) e expectativa de vida (ex) por idade para as tábuas selecionadas. Faça download em CSV, XLSX ou JSON — todos os campos incluídos, no formato esperado pela tela de importação.</p>
     <div class="ctrl-row">
       <div class="ctrl-group">
         <span class="ctrl-label">Sexo</span>
@@ -426,40 +432,10 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
   </div>
 </section>
 
-<!-- S5 · EXPECTATIVA DE VIDA -->
-<section class="section" id="expectativa">
-  <div class="section-inner">
-    <div class="eyebrow">Seção 5 · Calculadora</div>
-    <h2 class="section-title">Expectativa de vida</h2>
-    <p class="section-desc">Calcule e compare a expectativa de vida futura em todas as tábuas disponíveis. A comparação automática usa a BR-EMSsb 2026 como referência.</p>
-    <div class="ctrl-row">
-      <div class="ctrl-group">
-        <span class="ctrl-label">Sexo</span>
-        <div class="seg-group">
-          <button class="seg-btn active" id="exSexM" onclick="setExSex('M')">Masc.</button>
-          <button class="seg-btn" id="exSexF" onclick="setExSex('F')">Fem.</button>
-        </div>
-      </div>
-      <div class="ctrl-group">
-        <span class="ctrl-label">Idade atual</span>
-        <input class="ctrl-input" type="number" id="exIdade" value="60" min="0" max="100">
-      </div>
-      <div class="ctrl-group" style="align-self:flex-end">
-        <button class="btn-primary" onclick="calcExpectativa()">Calcular</button>
-      </div>
-    </div>
-    <div class="kpi-grid" id="kpiExpectativa"></div>
-    <div class="chart-wrap"><div class="chart-hdr">Expectativa de vida por tábua (anos futuros)</div><div id="chartExpectativa" style="height:360px"></div></div>
-    <h3 style="font-family:var(--font-d);font-weight:700;text-transform:uppercase;font-size:1rem;letter-spacing:.04em;margin:28px 0 14px">Comparação automática — idades de referência previdenciária (vs. BR-EMSsb 2026)</h3>
-    <div class="chart-wrap"><div class="chart-hdr">e₅₀, e₆₀, e₇₀ — versões BR-EMS (sobrevivência)</div><div id="chartRefIdades" style="height:340px"></div></div>
-    <div id="tblRefIdades" style="overflow-x:auto;margin-top:16px"></div>
-  </div>
-</section>
-
-<!-- S6 · IMPACTO POR IDADE -->
+<!-- S5 · IMPACTO POR IDADE -->
 <section class="section section-alt" id="impacto">
   <div class="section-inner">
-    <div class="eyebrow">Seção 6 · Simulador</div>
+    <div class="eyebrow">Seção 4 · Análise por Idade</div>
     <h2 class="section-title">Impacto por idade</h2>
     <p class="section-desc">Selecione uma idade e sexo para comparar qx e expectativa de vida entre todas as tábuas disponíveis naquele ponto etário.</p>
     <div class="ctrl-row">
@@ -484,15 +460,16 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
       <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr" id="impQxHdr">qx na idade selecionada — todas as tábuas</div><div id="chartImpQx" style="height:340px"></div></div>
       <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr" id="impExHdr">Expectativa de vida (ex) na idade selecionada</div><div id="chartImpEx" style="height:340px"></div></div>
     </div>
+    <div class="insight-box" id="impactoTxt" style="margin-top:18px;display:none"></div>
   </div>
 </section>
 
 <!-- S6B · COMPARAÇÃO 2015/2021 → 2026 -->
 <section class="section section-alt" id="comparacao-atualizacao">
   <div class="section-inner">
-    <div class="eyebrow">Seção 6B · Impacto da Atualização</div>
+    <div class="eyebrow">Seção 5 · Impacto da Atualização</div>
     <h2 class="section-title">Comparação BR-EMS — 2015 / 2021 → 2026</h2>
-    <p class="section-desc">Avalie o impacto prático da atualização das tábuas sobre produtos de seguro de vida (mortalidade) e previdência (sobrevivência). Ajuste a idade e os parâmetros financeiros para ver os efeitos em qx, expectativa de vida e custo esperado.</p>
+    <p class="section-desc">Avalie o impacto financeiro da atualização das tábuas sobre seguros de vida (BR-EMSmt) e previdência (BR-EMSsb). Analise o prêmio puro de risco ao longo das idades e os efeitos sobre renda vitalícia esperada.</p>
     <div class="tab-bar">
       <button class="tab-btn active" id="cmpTabMT" onclick="setCmpTab('mt')">Seguros de Vida (Mortalidade — BR-EMSmt)</button>
       <button class="tab-btn" id="cmpTabSB" onclick="setCmpTab('sb')">Previdência (Sobrevivência — BR-EMSsb)</button>
@@ -519,8 +496,8 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
       </div>
       <div id="kpiCmpMT" class="kpi-grid" style="margin-bottom:22px"></div>
       <div class="g2">
-        <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">qx por versão — probabilidade de morte no ano</div><div id="chartCmpMTqx" style="height:300px"></div></div>
-        <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Sinistro esperado (R$) por versão</div><div id="chartCmpMTsinistro" style="height:300px"></div></div>
+        <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Prêmio puro de risco por idade — R$ = qx × capital segurado</div><div id="chartCmpMTcurva" style="height:300px"></div></div>
+        <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Variação de qx — 2021 → 2026 (%) por idade</div><div id="chartCmpMTdelta" style="height:300px"></div></div>
       </div>
       <div class="insight-box" id="cmpMTInsight" style="margin-top:18px"></div>
     </div>
@@ -557,7 +534,7 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
 <!-- S7 · BENEFÍCIOS -->
 <section class="section" id="beneficios">
   <div class="section-inner">
-    <div class="eyebrow">Seção 7 · Simulador Atuarial</div>
+    <div class="eyebrow">Seção 6 · Simulador Atuarial</div>
     <h2 class="section-title">Impacto em concessões de benefícios</h2>
     <p class="section-desc">Estime o impacto financeiro da troca de tábua sobre anuidades previdenciárias. A anuidade <em>ä</em> (antecipada, ou <em>due</em>) representa o valor presente de uma série de pagamentos unitários anuais, pagos no início de cada período, enquanto o participante sobreviver.</p>
     <div class="ctrl-row" style="align-items:flex-end">
@@ -593,6 +570,7 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
       <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Waterfall — impacto na anuidade vitalícia ä</div><div id="chartWaterfall" style="height:320px"></div></div>
       <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Fator ä por versão BR-EMS (sobrevivência)</div><div id="chartAnuidades" style="height:320px"></div></div>
     </div>
+    <div class="insight-box" id="bfInsight" style="margin-top:18px;display:none"></div>
     <p class="data-note">ä = anuidade vitalícia antecipada (<em>annuity-due</em>): soma dos valores presentes dos pagamentos futuros ponderados pela probabilidade de sobrevivência. Calculado com pagamentos anuais.</p>
   </div>
 </section>
@@ -600,7 +578,7 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
 <!-- S8 · PERFIL DO GRUPO -->
 <section class="section section-alt" id="grupo">
   <div class="section-inner">
-    <div class="eyebrow">Seção 8 · Simulador</div>
+    <div class="eyebrow">Seção 7 · Simulador</div>
     <h2 class="section-title">Perfil do grupo</h2>
     <p class="section-desc">Informe o perfil demográfico do grupo de beneficiários para calcular a expectativa de vida mista e o ranking de aderência por tábua.</p>
     <div class="ctrl-row">
@@ -628,63 +606,10 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
   </div>
 </section>
 
-<!-- S9 · MATRIZ -->
-<section class="section" id="matriz">
-  <div class="section-inner">
-    <div class="eyebrow">Seção 9 · Análise</div>
-    <h2 class="section-title">Matriz de diferenças entre tábuas</h2>
-    <p class="section-desc">Diferença percentual média de qx entre pares de tábuas, nas idades selecionadas. Selecione as tábuas desejadas para a comparação.</p>
-    <div class="ctrl-row">
-      <div class="ctrl-group">
-        <span class="ctrl-label">Sexo</span>
-        <div class="seg-group">
-          <button class="seg-btn active" id="matSexM" onclick="setMatSex('M')">Masc.</button>
-          <button class="seg-btn" id="matSexF" onclick="setMatSex('F')">Fem.</button>
-        </div>
-      </div>
-      <div class="ctrl-group">
-        <span class="ctrl-label">Faixa etária</span>
-        <div style="display:flex;gap:6px;align-items:center">
-          <input class="ctrl-input" type="number" id="matAgeMin" value="40" min="0" max="100" style="width:68px">
-          <span style="color:var(--fg-3);font-size:.82rem">a</span>
-          <input class="ctrl-input" type="number" id="matAgeMax" value="90" min="10" max="120" style="width:68px">
-        </div>
-      </div>
-      <div class="ctrl-group" style="align-self:flex-end">
-        <button class="btn-primary" onclick="renderMatriz()">Atualizar</button>
-      </div>
-    </div>
-    <div class="ctrl-row" style="margin-bottom:16px">
-      <div class="ctrl-group" style="width:100%">
-        <span class="ctrl-label">Tábuas na matriz</span>
-        <div class="pill-group" id="matPills"></div>
-      </div>
-    </div>
-    <div class="chart-wrap" style="margin-bottom:16px"><div class="chart-hdr">Heatmap — diferença percentual média de qx (linha vs. coluna)</div><div id="chartMatriz" style="height:500px"></div></div>
-    <div class="kpi-grid" id="kpiMatriz"></div>
-  </div>
-</section>
-
-<!-- S10 · DASHBOARD -->
-<section class="section section-alt" id="dashboard">
-  <div class="section-inner">
-    <div class="eyebrow">Seção 10 · Resumo</div>
-    <h2 class="section-title">Dashboard executivo</h2>
-    <p class="section-desc">Visão consolidada dos principais achados, rankings e insights automáticos da análise comparativa.</p>
-    <div class="kpi-grid" id="kpiDash"></div>
-    <div class="g2" style="margin-bottom:20px">
-      <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Ranking — expectativa de vida aos 60 (e₆₀)</div><div id="chartDashRank" style="height:380px"></div></div>
-      <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">qx₆₅ — masculino vs. feminino (BR-EMS)</div><div id="chartDashQx65" style="height:380px"></div></div>
-    </div>
-    <h3 style="font-family:var(--font-d);font-weight:700;text-transform:uppercase;font-size:.95rem;letter-spacing:.06em;color:var(--fg-1);margin-bottom:14px">Insights automáticos</h3>
-    <div id="insightsContainer"></div>
-  </div>
-</section>
-
-<!-- S11 · METODOLOGIA -->
+<!-- S9 · METODOLOGIA -->
 <section class="section" id="metodologia">
   <div class="section-inner">
-    <div class="eyebrow">Seção 11 · Como ler os números</div>
+    <div class="eyebrow">Seção 8 · Como ler os números</div>
     <h2 class="section-title">Metodologia e conceitos</h2>
     <p class="section-desc">Entenda os indicadores utilizados nesta análise e como interpretá-los no contexto de planos de benefícios previdenciários.</p>
     <div class="meto-grid">
@@ -736,10 +661,10 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
   </div>
 </section>
 
-<!-- S12 · IMPORTAR -->
+<!-- S10 · IMPORTAR -->
 <section class="section section-alt" id="importSec">
   <div class="section-inner">
-    <div class="eyebrow">Seção 12 · Dados</div>
+    <div class="eyebrow">Seção 9 · Dados</div>
     <h2 class="section-title">Importar dados</h2>
     <p class="section-desc">Carregue um CSV ou XLSX com novas tábuas biométricas. A aplicação detecta automaticamente as colunas e integra os dados em todos os painéis.</p>
     <div class="g2">
@@ -838,7 +763,6 @@ const S={
   exSex:'M',exAge:60,
   impSex:'M',impAge:65,
   bfSex:'M',
-  matSex:'M',matSel:['BR-EMSsb-2026-M','BR-EMSsb-2021-M','BR-EMSsb-2015-M','AT2012-Basica-M','AT2000-Basica-M','CPM2014-M'],
   tqSex:'M',tqSel:['BR-EMSsb-2026-M','BR-EMSsb-2021-M','BR-EMSsb-2015-M','AT2012-Basica-M','AT2000-Basica-M'],
 };
 
@@ -854,6 +778,7 @@ const getAges=k=>{const t=TABUAS_DATA[k];if(!t)return[];return Object.keys(t.qx)
 const tablesForSex=sex=>Object.keys(TABUAS_DATA).filter(k=>{const m=TABUA_META[k];return m&&(sex==='both'||m.sex===sex);});
 const brEmsKeys=(sex,tipo)=>Object.keys(TABUAS_DATA).filter(k=>{const m=TABUA_META[k];return m&&m.group==='BR-EMS'&&(!tipo||m.tipo===tipo)&&(sex==='both'||m.sex===sex);});
 const mktKeys=sex=>Object.keys(TABUAS_DATA).filter(k=>{const m=TABUA_META[k];return m&&m.group==='Mercado'&&(sex==='both'||m.sex===sex);});
+const importedKeys=sex=>Object.keys(TABUAS_DATA).filter(k=>{const m=TABUA_META[k];return m&&m.group==='Importada'&&(sex==='both'||m.sex===sex);});
 const shortLabel=k=>getLabel(k).replace(' (M)','').replace(' (F)','').replace(/\(.\)$/,'').trim();
 
 function calcAnnuity(key,age,rate){
@@ -923,11 +848,30 @@ function renderVersoes(){
 
   // KPIs
   const ex26=getEx(k26,60)||0,ex21=getEx(k21,60)||0;
+  const qx26_65=getQx(k26,65)||0,qx21_65=getQx(k21,65)||0;
+  const dqx65=qx21_65>0?((qx26_65-qx21_65)/qx21_65*100).toFixed(1):null;
   document.getElementById('kpiVersoes').innerHTML=`
     <div class="kpi"><div class="kpi-label">e₆₀ BR-EMSsb 2026</div><div class="kpi-value">${ex26.toFixed(1)}</div><div class="kpi-sub">${refSex==='M'?'Masculino':'Feminino'} · anos</div></div>
     <div class="kpi c-ochre"><div class="kpi-label">e₆₀ BR-EMSsb 2021</div><div class="kpi-value">${ex21.toFixed(1)}</div><div class="kpi-sub">anos</div></div>
     <div class="kpi ${ex26-ex21>=0?'':'c-red'}"><div class="kpi-label">Variação 2021→2026</div><div class="kpi-value">${ex26-ex21>=0?'+':''}${(ex26-ex21).toFixed(1)}</div><div class="kpi-sub">anos em e₆₀</div></div>
-    <div class="kpi c-sage"><div class="kpi-label">qx₆₅ BR-EMS${S.vTipo} 2026</div><div class="kpi-value">${(getQx(k26,65)||0).toFixed(5)}</div><div class="kpi-sub">probabilidade de óbito</div></div>`;
+    <div class="kpi c-sage"><div class="kpi-label">qx₆₅ BR-EMS${S.vTipo} 2026</div><div class="kpi-value">${qx26_65.toFixed(5)}</div><div class="kpi-sub">probabilidade de óbito</div></div>`;
+  // texto contextual adaptável
+  const sexLbl=S.vSex==='both'?'ambos os sexos':refSex==='M'?'Masculino':'Feminino';
+  const tipoLbl=S.vTipo==='sb'?'sobrevivência (sb)':'mortalidade (mt)';
+  const txtMap={
+    sb:{
+      qx:`A curva de <strong>qx</strong> da tábua de <strong>${tipoLbl}</strong> é a base para o cálculo de rendas vitalícias e reservas previdenciárias. Quanto menor o qx a cada idade, maior a longevidade projetada e mais elevado o passivo do plano. Aos 65 anos (${sexLbl}), a BR-EMS 2026 registra qx = ${qx26_65.toFixed(5)}${dqx65?', variação de '+dqx65+'% em relação a 2021':''}.`,
+      lx:`O <strong>número de sobreviventes (lx)</strong> descreve a curva de extinção de uma geração, partindo de 1.000.000 vidas. Na tábua de <strong>${tipoLbl}</strong>, lx indica quantos beneficiários de um plano ainda estarão vivos a cada idade futura — informação central para projeções de longo prazo e dimensionamento de reservas.`,
+      ex:`A <strong>expectativa de vida futura (ex)</strong> sintetiza o impacto cumulativo das premissas de mortalidade na tábua de <strong>${tipoLbl}</strong>. Aos 60 anos (${sexLbl}), a BR-EMS passa de e₆₀ = ${ex21.toFixed(1)} anos (2021) para ${ex26.toFixed(1)} anos (2026) — diferença de ${ex26>=ex21?'+':''}${(ex26-ex21).toFixed(1)} anos que impacta diretamente o passivo atuarial de anuidades vitalícias.`
+    },
+    mt:{
+      qx:`Na tábua de <strong>${tipoLbl}</strong>, o qx calibra diretamente o <strong>prêmio puro de risco</strong>: custo esperado de sinistro = qx × capital segurado. A comparação entre versões revela a tendência de revisão da mortalidade assumida pelo mercado segurador, impactando o preço dos seguros de vida individuais e em grupo.`,
+      lx:`O <strong>lx</strong> na tábua de <strong>${tipoLbl}</strong> descreve a curva de sobrevivência da carteira de segurados. Em análises de seguros em grupo, permite estimar quantos participantes permanecem expostos ao risco a cada idade — subsidiando o cálculo de reservas e projeções de sinistralidade futura.`,
+      ex:`A <strong>expectativa de vida (ex)</strong> na tábua de <strong>${tipoLbl}</strong> indica o tempo médio de permanência de um segurado sob cobertura. Maior ex implica maior duração de exposição ao risco, com reflexo direto no dimensionamento de prêmios de longo prazo e fatores de desconto atuarial.`
+    }
+  };
+  const el=document.getElementById('versoesTxt');
+  if(el)el.innerHTML=txtMap[S.vTipo]?.[S.vInd]||'';
 }
 
 // ── SECTION 3: MERCADO ────────────────────────────────────────────────────
@@ -935,8 +879,8 @@ function setMSex(s){S.mSex=s;['M','F','B'].forEach(x=>document.getElementById('m
 
 function buildMktPills(){
   const sx=S.mSex==='both'?'M':S.mSex;
-  const allKeys=[...brEmsKeys(sx,'sb').filter(k=>k.includes('2026')||k.includes('2021')),...mktKeys(sx)];
-  if(S.mSex==='both'){const fKeys=[...brEmsKeys('F','sb').filter(k=>k.includes('2026')||k.includes('2021')),...mktKeys('F')];fKeys.forEach(k=>{if(!allKeys.includes(k))allKeys.push(k);});}
+  const allKeys=[...brEmsKeys(sx,'sb').filter(k=>k.includes('2026')||k.includes('2021')),...mktKeys(sx),...importedKeys(sx)];
+  if(S.mSex==='both'){const fKeys=[...brEmsKeys('F','sb').filter(k=>k.includes('2026')||k.includes('2021')),...mktKeys('F'),...importedKeys('F')];fKeys.forEach(k=>{if(!allKeys.includes(k))allKeys.push(k);});}
   S.mktSel=S.mktSel.map(k=>TABUAS_DATA[k]?k:null).filter(Boolean);
   if(!S.mktSel.length)S.mktSel=[`BR-EMSsb-2026-${sx}`,`AT2000-Basica-${sx}`,`AT2012-Basica-${sx}`];
   const c=document.getElementById('mktPills');c.innerHTML='';
@@ -1020,67 +964,55 @@ function renderTabelaQx(){
   document.getElementById('qxTable').innerHTML=thead+tbody;
 }
 
+function _buildExportRows(keys,ages){
+  const rows=[];
+  keys.forEach(k=>{
+    const sex=TABUA_META[k]?.sex||'M';
+    ages.forEach(a=>{
+      const qx=getQx(k,a);if(qx==null)return;
+      rows.push({tabua:k,sexo:sex,idade:a,qx,lx:getLx(k,a),ex:getEx(k,a)});
+    });
+  });
+  return rows;
+}
+
 function dlCSV(){
   const {keys,ages}=getTableData();
-  const hdr='Idade;'+keys.map(k=>getLabel(k)).join(';');
-  const rows=ages.map(a=>a+';'+keys.map(k=>{const v=getQx(k,a);return v!=null?v.toFixed(10):'-';}).join(';'));
-  const blob=new Blob(['﻿'+hdr+'\n'+rows.join('\n')],{type:'text/csv;charset=utf-8'});
-  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='tabuas_qx.csv';a.click();URL.revokeObjectURL(url);
+  const rows=_buildExportRows(keys,ages);
+  const hdr='Tabua;Sexo;Idade;qx;lx;ex';
+  const lines=rows.map(r=>[r.tabua,r.sexo,r.idade,r.qx.toFixed(10),r.lx!=null?r.lx.toFixed(6):'-',r.ex!=null?r.ex.toFixed(4):'-'].join(';'));
+  const blob=new Blob(['﻿'+hdr+'\n'+lines.join('\n')],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='tabuas_dados.csv';a.click();URL.revokeObjectURL(url);
 }
 
 function dlXLSX(){
   const {keys,ages}=getTableData();
-  const header=['Idade',...keys.map(k=>getLabel(k))];
-  const data=ages.map(a=>[a,...keys.map(k=>getQx(k,a)||'')]);
+  const rows=_buildExportRows(keys,ages);
+  const header=['Tabua','Sexo','Idade','qx','lx','ex'];
+  const data=rows.map(r=>[r.tabua,r.sexo,r.idade,r.qx,r.lx??'',r.ex??'']);
   const wb=XLSX.utils.book_new();
   const ws=XLSX.utils.aoa_to_sheet([header,...data]);
-  XLSX.utils.book_append_sheet(wb,ws,'qx');
-  XLSX.writeFile(wb,'tabuas_qx.xlsx');
+  XLSX.utils.book_append_sheet(wb,ws,'dados');
+  XLSX.writeFile(wb,'tabuas_dados.xlsx');
 }
 
 function dlJSON(){
   const {keys,ages}=getTableData();
   const out={};
-  keys.forEach(k=>{out[k]={};ages.forEach(a=>{const v=getQx(k,a);if(v!=null)out[k][a]=v;});});
-  const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='tabuas_qx.json';a.click();URL.revokeObjectURL(url);
-}
-
-// ── SECTION 5: EXPECTATIVA ────────────────────────────────────────────────
-function setExSex(s){S.exSex=s;document.getElementById('exSexM').classList.toggle('active',s==='M');document.getElementById('exSexF').classList.toggle('active',s==='F');}
-function calcExpectativa(){
-  const age=parseInt(document.getElementById('exIdade').value)||60;S.exAge=age;
-  const all=tablesForSex(S.exSex).filter(k=>TABUAS_DATA[k]);
-  const res=all.map(k=>({key:k,ex:getEx(k,age)||0})).filter(r=>r.ex>0).sort((a,b)=>b.ex-a.ex);
-  const ref=`BR-EMSsb-2026-${S.exSex}`;const refEx=getEx(ref,age)||0;
-  const maxEx=res[0]||{ex:0};const minEx=res[res.length-1]||{ex:0};
-  document.getElementById('kpiExpectativa').innerHTML=`
-    <div class="kpi"><div class="kpi-label">e${age} · BR-EMSsb 2026</div><div class="kpi-value">${refEx.toFixed(1)}</div><div class="kpi-sub">${S.exSex==='M'?'Masc.':'Fem.'} · anos</div></div>
-    <div class="kpi c-navy"><div class="kpi-label">Maior e${age} (+ conservadora)</div><div class="kpi-value">${maxEx.ex.toFixed(1)}</div><div class="kpi-sub">${shortLabel(maxEx.key||'')}</div></div>
-    <div class="kpi c-red"><div class="kpi-label">Menor e${age}</div><div class="kpi-value">${minEx.ex.toFixed(1)}</div><div class="kpi-sub">${shortLabel(minEx.key||'')}</div></div>
-    <div class="kpi c-ochre"><div class="kpi-label">Amplitude</div><div class="kpi-value">${(maxEx.ex-minEx.ex).toFixed(1)}</div><div class="kpi-sub">anos de diferença</div></div>`;
-  plt('chartExpectativa',[{x:res.map(r=>shortLabel(r.key)),y:res.map(r=>r.ex),type:'bar',marker:{color:res.map(r=>getColor(r.key))},hovertemplate:'<b>%{y:.2f} anos</b><extra>%{x}</extra>',text:res.map(r=>r.ex.toFixed(1)),textposition:'outside',textfont:{size:9,family:'"Barlow Condensed"'}}],{xaxis:{...PLY.xaxis,tickangle:-45},yaxis:{...PLY.yaxis,title:{text:`e${age} (anos)`,font:{size:11}}},margin:{t:20,b:130,l:60,r:16}});
-  renderRefIdades();
-}
-
-function renderRefIdades(){
-  const ref=`BR-EMSsb-2026-${S.exSex}`;
-  const brKeys=brEmsKeys(S.exSex,'sb');
-  const refAges=[50,60,70];
-  const traces=refAges.map((a,i)=>({name:`e${a}`,x:brKeys.map(k=>shortLabel(k)),y:brKeys.map(k=>getEx(k,a)||0),type:'bar',marker:{color:['#FF7000','#2E4057','#E3B23C'][i]},hovertemplate:`<b>%{y:.1f} anos</b><extra>e${a}</extra>`}));
-  plt('chartRefIdades',traces,{barmode:'group',xaxis:{...PLY.xaxis,tickangle:-30},yaxis:{...PLY.yaxis,title:{text:'Expectativa de vida (anos)'}},margin:{t:20,b:100,l:60,r:16}});
-  let tbl=`<table class="rtable" style="font-size:.76rem"><thead><tr><th>Tábua</th>${refAges.map(a=>`<th>e${a}</th><th>vs 2026</th>`).join('')}</tr></thead><tbody>`;
-  brKeys.forEach(k=>{
-    const is26=k===ref;
-    tbl+=`<tr ${is26?'style="background:rgba(255,112,0,.05)"':''}><td><strong style="color:${getColor(k)}">${shortLabel(k)} ${is26?'<span class="tag tag-orange">Ref.</span>':''}</strong></td>`;
-    refAges.forEach(a=>{const ex=getEx(k,a)||0,r=getEx(ref,a)||0;const d=ex-r;tbl+=`<td style="font-family:var(--font-d);font-weight:700">${ex.toFixed(1)}</td><td style="font-weight:700;color:${is26?'#6B6B6B':d>0?'#1B7A4D':'#C0392B'}">${is26?'—':(d>=0?'+':'')+d.toFixed(1)+'a'}</td>`;});
-    tbl+='</tr>';
+  keys.forEach(k=>{
+    out[k]={qx:{},lx:{},ex:{}};
+    ages.forEach(a=>{
+      const qx=getQx(k,a);if(qx==null)return;
+      out[k].qx[a]=qx;
+      const lx=getLx(k,a);if(lx!=null)out[k].lx[a]=lx;
+      const ex=getEx(k,a);if(ex!=null)out[k].ex[a]=ex;
+    });
   });
-  tbl+='</tbody></table>';
-  document.getElementById('tblRefIdades').innerHTML=tbl;
+  const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='tabuas_dados.json';a.click();URL.revokeObjectURL(url);
 }
 
-// ── SECTION 6: IMPACTO POR IDADE ──────────────────────────────────────────
+// ── SECTION 5: IMPACTO POR IDADE ──────────────────────────────────────────
 function setImpSex(s){S.impSex=s;document.getElementById('impSexM').classList.toggle('active',s==='M');document.getElementById('impSexF').classList.toggle('active',s==='F');buildImpRef();renderImpacto();}
 function buildImpRef(){
   const sel=document.getElementById('impRef');if(!sel)return;
@@ -1109,6 +1041,18 @@ function renderImpacto(){
   plt('chartImpQx',[{x:lbls,y:res.map(r=>r.qx),type:'bar',marker:{color:cols},hovertemplate:'<b>%{y:.6f}</b><extra>%{x}</extra>'}],{xaxis:{...PLY.xaxis,tickangle:-50},yaxis:{...PLY.yaxis,title:{text:`qx${age}`,font:{size:11}}},margin:{t:20,b:130,l:70,r:10}});
   const exRes=res.filter(r=>r.ex>0).sort((a,b)=>b.ex-a.ex);
   plt('chartImpEx',[{x:exRes.map(r=>shortLabel(r.key)),y:exRes.map(r=>r.ex),type:'bar',marker:{color:exRes.map(r=>getColor(r.key))},hovertemplate:'<b>%{y:.1f} anos</b><extra>%{x}</extra>'}],{xaxis:{...PLY.xaxis,tickangle:-50},yaxis:{...PLY.yaxis,title:{text:`e${age} (anos)`,font:{size:11}}},margin:{t:20,b:130,l:60,r:10}});
+  // texto adaptável
+  const impEl=document.getElementById('impactoTxt');
+  if(impEl&&res.length>=2){
+    const sexLbl=S.impSex==='M'?'Masculino':'Feminino';
+    const spread=minQx.qx>0?((maxQx.qx-minQx.qx)/minQx.qx*100).toFixed(1):null;
+    const br26=res.find(r=>r.key===`BR-EMSsb-2026-${S.impSex}`)||res.find(r=>r.key.includes('2026'));
+    const br26rank=br26?res.indexOf(br26)+1:null;
+    let txt=`<strong>Comparativo — ${sexLbl}, ${age} anos</strong>`;
+    if(spread)txt+=`Entre as ${res.length} tábuas disponíveis, a amplitude de qx${age} é de ${spread}%: a <strong>${shortLabel(minQx.key)}</strong> registra a menor mortalidade (${minQx.qx.toFixed(5)}) — mais conservadora para anuidades — enquanto a <strong>${shortLabel(maxQx.key)}</strong> projeta a maior (${maxQx.qx.toFixed(5)}). `;
+    if(br26&&br26rank)txt+=`A BR-EMSsb 2026 ocupa a ${br26rank}ª posição no ranking, com qx${age} = ${br26.qx.toFixed(5)}.`;
+    impEl.innerHTML=txt;impEl.style.display='';
+  }else if(impEl)impEl.style.display='none';
 }
 
 // ── SECTION 7: BENEFÍCIOS ─────────────────────────────────────────────────
@@ -1143,6 +1087,19 @@ function calcBeneficios(){
   const allBR=brEmsKeys(S.bfSex,'sb');
   const annData=allBR.map(k=>({key:k,ann:calcAnnuity(k,age,rate)})).sort((a,b)=>b.ann-a.ann);
   plt('chartAnuidades',[{x:annData.map(r=>shortLabel(r.key)),y:annData.map(r=>r.ann),type:'bar',marker:{color:annData.map(r=>getColor(r.key))},hovertemplate:'<b>ä = %{y:.4f}</b><extra>%{x}</extra>',text:annData.map(r=>r.ann.toFixed(3)),textposition:'outside',textfont:{size:9}}],{xaxis:{...PLY.xaxis,tickangle:-35},yaxis:{...PLY.yaxis,title:{text:'ä (anuidade vitalícia antecipada)',font:{size:11}}},margin:{t:30,b:100,l:70,r:16}});
+  // texto adaptável
+  const bfEl=document.getElementById('bfInsight');
+  if(bfEl){
+    const sexLbl=S.bfSex==='M'?'Masculino':'Feminino';
+    const fmtR=n=>n.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
+    const reservaOld=annOld*1000*12,reservaNew=annNew*1000*12;
+    const dir=delta>=0?'sobe de':'cai de';
+    const impacto=delta>=0?'aumento no passivo atuarial':'redução no passivo atuarial';
+    bfEl.innerHTML=`<strong>${shortLabel(oldKey)} → ${shortLabel(newKey)} · ${sexLbl}, ${age} anos, ${rate}% a.a.</strong>`
+      +`A substituição da tábua implica ${delta>=0?'<strong style="color:#C0392B">aumento</strong>':'<strong style="color:#1B7A4D">redução</strong>'} de ${Math.abs(deltaPct).toFixed(2)}% no fator ä (de ${annOld.toFixed(3)} para ${annNew.toFixed(3)}). `
+      +`Para um benefício de R$ 1.000/mês, a reserva individual estimada ${dir} <strong>R$ ${fmtR(reservaOld)}</strong> para <strong>R$ ${fmtR(reservaNew)}</strong> — ${impacto} de R$ ${fmtR(Math.abs(reservaNew-reservaOld))} por beneficiário.`;
+    bfEl.style.display='';
+  }
 }
 
 // ── SECTION 8: GRUPO ──────────────────────────────────────────────────────
@@ -1165,75 +1122,12 @@ function calcGrupo(){
     {name:'Masculino',x:results.map(r=>r.label),y:results.map(r=>r.exM),type:'scatter',mode:'markers',marker:{color:'#2E4057',size:8},hovertemplate:'%{y:.2f}a<extra>Masc.</extra>'},
     {name:'Feminino',x:results.map(r=>r.label),y:results.map(r=>r.exF),type:'scatter',mode:'markers',marker:{color:'#FF7000',size:8,symbol:'diamond'},hovertemplate:'%{y:.2f}a<extra>Fem.</extra>'},
   ],{xaxis:{...PLY.xaxis,tickangle:-35},yaxis:{...PLY.yaxis,title:{text:'Expectativa de vida (anos)',font:{size:11}}},margin:{t:20,b:110,l:60,r:10}});
-  let panel=`<div style="font-size:.82rem;line-height:1.7"><div style="padding:8px 10px;background:var(--mi-orange-50);border-radius:6px;margin-bottom:10px"><strong style="font-family:var(--font-d);text-transform:uppercase;font-size:.88rem">Perfil</strong><br>Idade média: <strong>${age} anos</strong> · ${(pM*100).toFixed(0)}% M / ${(pF*100).toFixed(0)}% F</div>`;
+  const spread=results.length>=2?(results[0].exMix-results[results.length-1].exMix).toFixed(1):null;
+  const refPos=ref?results.indexOf(ref)+1:null;
+  let panel=`<div style="font-size:.82rem;line-height:1.7"><div style="padding:8px 10px;background:var(--mi-orange-50);border-radius:6px;margin-bottom:10px"><strong style="font-family:var(--font-d);text-transform:uppercase;font-size:.88rem">Perfil</strong><br>Idade média: <strong>${age} anos</strong> · ${(pM*100).toFixed(0)}% M / ${(pF*100).toFixed(0)}% F</div>`
+    +(spread?`<p style="font-size:.8rem;color:var(--fg-2);padding:0 2px 10px;margin:0;border-bottom:1px solid var(--mi-ink-100)">A expectativa de vida mista do grupo aos <strong>${age} anos</strong> varia de <strong>${results[results.length-1].exMix.toFixed(1)}</strong> a <strong>${results[0].exMix.toFixed(1)} anos</strong> conforme a tábua adotada — amplitude de <strong>${spread} anos</strong> entre o cenário mais e o menos conservador.${refPos?` Pela BR-EMS 2026, o grupo ocupa a ${refPos}ª posição nesse ranking.`:''}</p>`:'');
   results.forEach((r,i)=>{const isRef=r===ref;const diff=ref?r.exMix-ref.exMix:0;panel+=`<div style="display:flex;justify-content:space-between;padding:4px ${isRef?'8px':'0'};border-bottom:1px solid var(--mi-ink-100)${isRef?';background:rgba(255,112,0,.04);border-radius:4px':''}"><span><strong style="color:${r.color}">${i+1}.</strong> ${r.label} ${isRef?'<span class="tag tag-orange">Ref</span>':''}</span><span><strong>${r.exMix.toFixed(1)}a</strong> ${isRef?'':diff>=0?`<span style="color:#1B7A4D">+${diff.toFixed(1)}</span>`:`<span style="color:#C0392B">${diff.toFixed(1)}</span>`}</span></div>`;});
   panel+='</div>';document.getElementById('grupoPanel').innerHTML=panel;
-}
-
-// ── SECTION 9: MATRIZ ─────────────────────────────────────────────────────
-function setMatSex(s){S.matSex=s;document.getElementById('matSexM').classList.toggle('active',s==='M');document.getElementById('matSexF').classList.toggle('active',s==='F');buildMatPills();}
-function buildMatPills(){
-  const all=tablesForSex(S.matSex).filter(k=>TABUAS_DATA[k]&&getQx(k,65));
-  const c=document.getElementById('matPills');c.innerHTML='';
-  all.forEach(k=>{
-    const isSel=S.matSel.includes(k);
-    const pill=document.createElement('label');pill.className='pill'+(isSel?' sel':'');
-    if(isSel){pill.style.background=getColor(k);pill.style.borderColor=getColor(k);}
-    pill.innerHTML=`<input type="checkbox" ${isSel?'checked':''} onchange="toggleMat('${k}',this)"><span class="pdot" style="background:${getColor(k)}"></span>${shortLabel(k)}`;
-    c.appendChild(pill);
-  });
-}
-function toggleMat(k,el){
-  if(el.checked)S.matSel.push(k);else S.matSel=S.matSel.filter(x=>x!==k);
-  const pill=el.closest('.pill');pill.classList.toggle('sel',el.checked);
-  pill.style.background=el.checked?getColor(k):'';pill.style.borderColor=el.checked?getColor(k):'';
-}
-function renderMatriz(){
-  const ageMin=parseInt(document.getElementById('matAgeMin').value)||40;
-  const ageMax=parseInt(document.getElementById('matAgeMax').value)||90;
-  const ageRange=Array.from({length:Math.max(1,ageMax-ageMin+1)},(_,i)=>i+ageMin);
-  const keys=S.matSel.filter(k=>TABUAS_DATA[k]&&getQx(k,65));
-  if(keys.length<2){document.getElementById('chartMatriz').innerHTML='<p style="padding:24px;color:var(--fg-3)">Selecione pelo menos 2 tábuas.</p>';return;}
-  const zData=keys.map(row=>keys.map(col=>{
-    let s=0,n=0;ageRange.forEach(a=>{const vR=getQx(row,a),vC=getQx(col,a);if(vR&&vC&&vC>0){s+=((vR-vC)/vC)*100;n++;}});
-    return n?parseFloat((s/n).toFixed(2)):null;
-  }));
-  const lbls=keys.map(k=>shortLabel(k));
-  plt('chartMatriz',[{z:zData,x:lbls,y:lbls,type:'heatmap',colorscale:[[0,'#1B7A4D'],[0.5,'#FAF8F2'],[1,'#C0392B']],zmid:0,hovertemplate:'Linha: %{y}<br>Coluna: %{x}<br>Dif. média: <b>%{z:.1f}%</b><extra></extra>',showscale:true,colorbar:{thickness:14,title:{text:'%',font:{size:10}}},text:zData.map(row=>row.map(v=>v!=null?(v>=0?'+':'')+v.toFixed(1)+'%':'—')),texttemplate:'%{text}',textfont:{size:10}}],{margin:{t:40,b:120,l:140,r:60},xaxis:{...PLY.xaxis,tickangle:-45,automargin:true,title:{text:'Coluna (referência)',font:{size:10}}},yaxis:{...PLY.yaxis,automargin:true,title:{text:'Linha',font:{size:10}}}});
-  let maxD=0,maxP=['',''];
-  keys.forEach((r,i)=>keys.forEach((c,j)=>{if(i!==j&&zData[i][j]!==null&&Math.abs(zData[i][j])>maxD){maxD=Math.abs(zData[i][j]);maxP=[r,c];}}));
-  document.getElementById('kpiMatriz').innerHTML=`
-    <div class="kpi c-red"><div class="kpi-label">Maior divergência média</div><div class="kpi-value">${maxD.toFixed(1)}%</div><div class="kpi-sub">${shortLabel(maxP[0])} vs ${shortLabel(maxP[1])} · idades ${ageMin}–${ageMax}</div></div>
-    <div class="kpi c-sage"><div class="kpi-label">Faixa analisada</div><div class="kpi-value">${ageMin}–${ageMax}</div><div class="kpi-sub">${ageRange.length} idades · ${keys.length} tábuas</div></div>
-    <div class="kpi c-navy"><div class="kpi-label">Pares comparados</div><div class="kpi-value">${keys.length*(keys.length-1)}</div><div class="kpi-sub">combinações únicas</div></div>`;
-}
-
-// ── SECTION 10: DASHBOARD ─────────────────────────────────────────────────
-function renderDashboard(){
-  const e60m26=getEx('BR-EMSsb-2026-M',60)||0,e60f26=getEx('BR-EMSsb-2026-F',60)||0;
-  const e60m21=getEx('BR-EMSsb-2021-M',60)||0;
-  document.getElementById('kpiDash').innerHTML=`
-    <div class="kpi"><div class="kpi-label">e₆₀ BR-EMSsb 2026 M</div><div class="kpi-value">${e60m26.toFixed(1)}</div><div class="kpi-sub">anos após aposentadoria</div></div>
-    <div class="kpi c-navy"><div class="kpi-label">e₆₀ BR-EMSsb 2026 F</div><div class="kpi-value">${e60f26.toFixed(1)}</div><div class="kpi-sub">anos após aposentadoria</div></div>
-    <div class="kpi c-ochre"><div class="kpi-label">Variação 2021→2026 (e₆₀ M)</div><div class="kpi-value">${(e60m26-e60m21>=0?'+':'')}${(e60m26-e60m21).toFixed(1)}</div><div class="kpi-sub">anos</div></div>
-    <div class="kpi c-sage"><div class="kpi-label">Tábuas disponíveis</div><div class="kpi-value">${Object.keys(TABUAS_DATA).length}</div><div class="kpi-sub">BR-EMS + Mercado</div></div>`;
-  const mKeys=tablesForSex('M').filter(k=>TABUAS_DATA[k]&&(getEx(k,60)||0)>0);
-  const rankM=mKeys.map(k=>({key:k,ex:getEx(k,60)})).sort((a,b)=>b.ex-a.ex);
-  plt('chartDashRank',[{x:rankM.map(r=>shortLabel(r.key)).reverse(),y:rankM.map(r=>r.ex).reverse(),type:'bar',marker:{color:rankM.map(r=>getColor(r.key)).reverse()},hovertemplate:'<b>%{y:.1f} anos</b><extra>%{x}</extra>',text:rankM.map(r=>r.ex.toFixed(1)).reverse(),textposition:'outside',textfont:{size:9}}],{xaxis:{...PLY.xaxis,tickangle:-45},yaxis:{...PLY.yaxis,title:{text:'e₆₀ (anos)',font:{size:11}},range:[0,Math.max(...rankM.map(r=>r.ex))+2]},margin:{t:30,b:140,l:60,r:10}});
-  const brAll=Object.keys(TABUAS_DATA).filter(k=>TABUA_META[k]?.group==='BR-EMS');
-  const brFams=[...new Set(brAll.map(k=>k.replace(/-[MF]$/,'')))];
-  const q65m=brFams.map(f=>getQx(f+'-M',65)||0),q65f=brFams.map(f=>getQx(f+'-F',65)||0);
-  const lblFams=brFams.map(f=>f.replace('BR-EMS',''));
-  plt('chartDashQx65',[{x:q65m,y:q65f,mode:'markers+text',text:lblFams,textposition:'top center',textfont:{size:9},marker:{color:brFams.map(f=>getColor(f+'-M')),size:13,line:{color:'white',width:1.5}},type:'scatter',hovertemplate:'M: %{x:.5f}<br>F: %{y:.5f}<extra>%{text}</extra>'},{x:[0,0.025],y:[0,0.025],mode:'lines',line:{color:'rgba(0,0,0,.12)',dash:'dash',width:1},showlegend:false,hoverinfo:'skip'}],{xaxis:{...PLY.xaxis,title:{text:'qx₆₅ Masculino',font:{size:11}}},yaxis:{...PLY.yaxis,title:{text:'qx₆₅ Feminino',font:{size:11}}},margin:{t:20,b:60,l:70,r:20}});
-  const qM26_65=getQx('BR-EMSsb-2026-M',65)||0,qM21_65=getQx('BR-EMSsb-2021-M',65)||0;
-  const dq=((qM26_65-qM21_65)/qM21_65*100).toFixed(1);
-  const at12=getQx('AT2012-Basica-M',65)||0;
-  const cpmd=getQx('CPM2014-M',70)||0,brd=getQx('BR-EMSsb-2026-M',70)||0;
-  document.getElementById('insightsContainer').innerHTML=`
-    <div class="insight-box"><strong>BR-EMS 2026: variação de mortalidade vs 2021</strong>A BR-EMSsb 2026 registra qx₆₅ = ${qM26_65.toFixed(6)} (Masc.), ${dq}% em relação à versão 2021 (${qM21_65.toFixed(6)}). A expectativa de vida aos 60 anos passou de ${e60m21.toFixed(1)} para ${e60m26.toFixed(1)} anos no sexo masculino, implicando ${(e60m26-e60m21>=0?'aumento':'redução')} no passivo projetado para anuidades vitalícias.</div>
-    <div class="insight-box"><strong>AT-2012 segue sendo a tábua mais conservadora para anuidades</strong>Com qx₆₅ = ${at12.toFixed(6)}, a AT-2012 Básica apresenta a menor mortalidade masculina aos 65 anos entre as tábuas analisadas — gerando os maiores fatores de anuidade (ä) e, portanto, o maior passivo estimado em concessões de benefício vitalício.</div>
-    <div class="insight-box"><strong>CPM 2014 torna-se mais conservadora que a BR-EMSsb 2026 acima de 70 anos</strong>Aos 70 anos, o CPM 2014 apresenta qx = ${cpmd.toFixed(6)} contra ${brd.toFixed(6)} da BR-EMSsb 2026 (Masc.) — ou seja, o CPM projeta maior longevidade nessa faixa. Para planos com proporção relevante de assistidos acima de 70 anos, o CPM 2014 pode gerar passivo superior à nova BR-EMS.</div>
-    <div class="insight-box"><strong>Diferença M/F ampla e consistente</strong>A diferença de expectativa de vida entre sexos aos 60 anos é de ${(e60f26-e60m26).toFixed(1)} anos (${e60m26.toFixed(1)}a M vs ${e60f26.toFixed(1)}a F na BR-EMSsb 2026). Planos com maior proporção feminina requerem premissas mais conservadoras e podem ter impacto relevante na migração entre tábuas.</div>`;
 }
 
 // ── IMPORT ────────────────────────────────────────────────────────────────
@@ -1250,7 +1144,7 @@ function processFile(file){
 }
 function parseCSVImp(text){const res=Papa.parse(text,{header:true,skipEmptyLines:true});importRows(res.data,res.meta.fields||[]);}
 function parseXLSXImp(buf){const wb=XLSX.read(buf,{type:'array'});const sh=wb.Sheets[wb.SheetNames[0]];const rows=XLSX.utils.sheet_to_json(sh,{defval:''});importRows(rows,rows.length?Object.keys(rows[0]):[]);}
-function detectCol(headers,cands){for(const c of cands){const m=headers.find(h=>h.toLowerCase().trim()===c);if(m)return m;}for(const c of cands){const m=headers.find(h=>h.toLowerCase().trim().includes(c));if(m)return m;}return null;}
+function detectCol(headers,cands){for(const c of cands){const m=headers.find(h=>h.toLowerCase().trim()===c);if(m)return m;}for(const c of cands){if(c.length<4)continue;const m=headers.find(h=>h.toLowerCase().trim().includes(c));if(m)return m;}return null;}
 function importRows(rows,headers){
   const hdr=headers.map(h=>h.toLowerCase().trim());
   const cT=detectCol(hdr,['tabua','tábua','table','tabela','nome']);const cS=detectCol(hdr,['sexo','sex','genero']);
@@ -1353,30 +1247,68 @@ function renderCmpMT(){
       <div class="kpi-value" style="font-size:1.25rem">${v.qx!=null?v.qx.toFixed(6):'—'}${i>0?_cmpDeltaTag(v.qx,ref15.qx,true):''}</div>
       <div class="kpi-sub">qx · prob. de morte no ano</div>
       <div style="margin-top:7px;font-size:.82rem;color:var(--fg-2)">e<sub>${idade}</sub> = <strong>${v.ex!=null?v.ex.toFixed(1):'—'}</strong> anos${i>0?_cmpDeltaTag(v.ex,ref15.ex,false):''}</div>
-      <div style="font-size:.82rem;color:var(--fg-2)">Sinistro esp.: <strong>R$ ${fmtBRL(v.sinistro)}</strong>${i>0?_cmpDeltaTag(v.sinistro,ref15.sinistro,true):''}</div>
+      <div style="font-size:.82rem;color:var(--fg-2)">Prêmio puro: <strong>R$ ${fmtBRL(v.sinistro)}</strong>${i>0?_cmpDeltaTag(v.sinistro,ref15.sinistro,true):''}</div>
     </div>`;
   }).join('')+`<div class="kpi c-navy">
     <div class="kpi-label">Δ Variação 2021 → 2026</div>
     <div class="kpi-value" style="font-size:1.25rem">${vals[1].qx&&vals[2].qx?((vals[2].qx-vals[1].qx)/vals[1].qx*100).toFixed(2)+'%':'—'}</div>
     <div class="kpi-sub">Δ qx${vals[1].qx&&vals[2].qx?(vals[2].qx<vals[1].qx?' — ↓ menor mortalidade':' — ↑ maior mortalidade'):''}</div>
-    <div style="margin-top:7px;font-size:.82rem;color:var(--fg-2)">Sinistro 2021→2026: <strong>${vals[1].sinistro&&vals[2].sinistro?((vals[2].sinistro-vals[1].sinistro)/vals[1].sinistro*100).toFixed(2)+'%':'—'}</strong></div>
+    <div style="margin-top:7px;font-size:.82rem;color:var(--fg-2)">Prêmio 2021→2026: <strong>${vals[1].sinistro&&vals[2].sinistro?((vals[2].sinistro-vals[1].sinistro)/vals[1].sinistro*100).toFixed(2)+'%':'—'}</strong></div>
     <div style="font-size:.82rem;color:var(--fg-2)">Δ e<sub>${idade}</sub>: <strong>${vals[1].ex&&vals[2].ex?((vals[2].ex-vals[1].ex)>=0?'+':'')+(vals[2].ex-vals[1].ex).toFixed(1)+' anos':'—'}</strong></div>
   </div>`;
 
-  const layout={margin:{t:30,r:20,b:40,l:70},plot_bgcolor:'#fff',paper_bgcolor:'#fff',showlegend:false,
-    font:{family:"Carlito,Calibri,system-ui",size:11},bargap:0.35};
-  Plotly.react('chartCmpMTqx',[{type:'bar',x:labels,y:vals.map(v=>v.qx),marker:{color:colors},
-    text:vals.map(v=>v.qx!=null?v.qx.toFixed(5):''),textposition:'outside',cliponaxis:false}],
-    {...layout,yaxis:{title:'qx',tickformat:'.5f'}},{responsive:true});
-  Plotly.react('chartCmpMTsinistro',[{type:'bar',x:labels,y:vals.map(v=>v.sinistro),marker:{color:colors},
-    text:vals.map(v=>v.sinistro!=null?'R$ '+fmtBRL(v.sinistro):''),textposition:'outside',cliponaxis:false}],
-    {...layout,yaxis:{title:'Sinistro Esperado (R$)'}},{responsive:true});
+  // ── Curva de prêmio puro por idade (idades 18–80)
+  const ageRange=Array.from({length:63},(_,i)=>i+18);
+  const PLYbase={margin:{t:30,r:20,b:45,l:80},plot_bgcolor:'#fff',paper_bgcolor:'#fff',
+    font:{family:'Carlito,Calibri,system-ui',size:11}};
+  const vLine={type:'line',x0:idade,x1:idade,y0:0,y1:1,yref:'paper',
+    line:{color:'rgba(46,64,87,0.35)',width:1.5,dash:'dot'}};
 
+  const tracesPremio=versions.map((v,i)=>({
+    x:ageRange,
+    y:ageRange.map(a=>{const qx=getQx(`BR-EMSmt-${v}-${sex}`,a);return qx!=null?qx*capital:null;}),
+    name:labels[i],type:'scatter',mode:'lines',
+    line:{color:colors[i],width:2.2},
+    hovertemplate:'<b>R$ %{y:,.2f}</b><extra>'+labels[i]+'</extra>'
+  }));
+  Plotly.react('chartCmpMTcurva',tracesPremio,{
+    ...PLYbase,showlegend:true,
+    legend:{x:0.02,y:0.98,bgcolor:'rgba(255,255,255,.9)',bordercolor:'#eee',borderwidth:1},
+    xaxis:{title:{text:'Idade'},zeroline:false,showgrid:true,gridcolor:'rgba(0,0,0,.05)'},
+    yaxis:{title:{text:'Prêmio puro (R$)'},zeroline:false,showgrid:true,gridcolor:'rgba(0,0,0,.05)'},
+    shapes:[vLine]
+  },{responsive:true});
+
+  // ── Variação relativa de qx 2021→2026 (%) por idade
+  const delta=ageRange.map(a=>{
+    const v21=getQx(`BR-EMSmt-2021-${sex}`,a),v26=getQx(`BR-EMSmt-2026-${sex}`,a);
+    return(v21&&v26&&v21>0)?(v26-v21)/v21*100:null;
+  });
+  const peakIdx=delta.reduce((b,d,i)=>d!=null&&Math.abs(d||0)>Math.abs(delta[b]||0)?i:b,0);
+  Plotly.react('chartCmpMTdelta',[{
+    x:ageRange,y:delta,type:'bar',
+    marker:{color:delta.map(d=>d!=null&&d<0?'#1B7A4D':'#C0392B')},
+    hovertemplate:'%{y:.2f}%<extra>Δ qx 2021→2026</extra>'
+  }],{
+    ...PLYbase,showlegend:false,
+    xaxis:{title:{text:'Idade'},zeroline:false,showgrid:true,gridcolor:'rgba(0,0,0,.05)'},
+    yaxis:{title:{text:'Δ% qx 2021→2026'},ticksuffix:'%',zeroline:true,zerolinecolor:'#aaa',zerolinewidth:1.5,showgrid:true,gridcolor:'rgba(0,0,0,.05)'},
+    shapes:[{type:'line',x0:17,x1:81,y0:0,y1:0,line:{color:'#aaa',width:1.2}},vLine]
+  },{responsive:true});
+
+  // ── Insight
   const dqPct=vals[1].qx&&vals[2].qx?((vals[2].qx-vals[1].qx)/vals[1].qx*100).toFixed(2):null;
-  document.getElementById('cmpMTInsight').innerHTML=`<strong>Leitura — ${labels[2]} vs ${labels[1]} (${sex==='M'?'Masculino':'Feminino'}, idade ${idade})</strong>`+
-    (dqPct!=null?`A tábua BR-EMSmt 2026 registra qx = ${vals[2].qx.toFixed(6)}, variação de <strong>${dqPct}%</strong> em relação à versão 2021 (${vals[1].qx.toFixed(6)}). `+
-    `Expectativa de vida passou de ${vals[1].ex?.toFixed(1)} para ${vals[2].ex?.toFixed(1)} anos. Sinistro esperado sobre R$ ${capital.toLocaleString('pt-BR')}: `+
-    `de <strong>R$ ${fmtBRL(vals[1].sinistro)}</strong> para <strong>R$ ${fmtBRL(vals[2].sinistro)}</strong>.`:'Dados não disponíveis para a idade selecionada.');
+  const peakAge=ageRange[peakIdx],peakDelta=delta[peakIdx];
+  const queda=vals[2].qx!=null&&vals[1].qx!=null&&vals[2].qx<vals[1].qx;
+  document.getElementById('cmpMTInsight').innerHTML=
+    `<strong>Seguros de Vida (BR-EMSmt) — ${sex==='M'?'Masculino':'Feminino'}, idade ${idade}</strong>`+
+    (dqPct!=null
+      ?`A BR-EMSmt 2026 registra qx = ${vals[2].qx.toFixed(6)}, variação de <strong>${dqPct}%</strong> em relação à versão 2021 (${vals[1].qx.toFixed(6)}).<br>`
+       +(queda
+         ?`Menor mortalidade implica <strong>menor prêmio puro de risco</strong>: sobre capital de R$ ${capital.toLocaleString('pt-BR')}, o custo de risco anual cai de R$ ${fmtBRL(vals[1].sinistro)} para <strong>R$ ${fmtBRL(vals[2].sinistro)}</strong>.<br>`
+         :`Maior mortalidade implica <strong>prêmio maior</strong>: o custo de risco anual sobe de R$ ${fmtBRL(vals[1].sinistro)} para <strong>R$ ${fmtBRL(vals[2].sinistro)}</strong>.<br>`)
+       +(peakDelta!=null?`Nas idades 18–80, a maior variação de qx ocorre aos <strong>${peakAge} anos</strong> (${peakDelta.toFixed(2)}%).<br>A linha pontilhada vertical marca a idade de referência selecionada.`:'')
+      :'Dados não disponíveis para a idade selecionada.');
 }
 
 function renderCmpSB(){
@@ -1415,32 +1347,45 @@ function renderCmpSB(){
     <div style="font-size:.82rem;color:var(--fg-2)">Δ e<sub>${idade}</sub>: <strong>${vals[1].ex&&vals[2].ex?((vals[2].ex-vals[1].ex)>=0?'+':'')+(vals[2].ex-vals[1].ex).toFixed(1)+' anos':'—'}</strong></div>
   </div>`;
 
-  const layout={margin:{t:30,r:20,b:40,l:70},plot_bgcolor:'#fff',paper_bgcolor:'#fff',showlegend:false,
-    font:{family:"Carlito,Calibri,system-ui",size:11},bargap:0.35};
+  const layout={margin:{t:36,r:50,b:40,l:70},plot_bgcolor:'#fff',paper_bgcolor:'#fff',showlegend:false,
+    font:{family:"Carlito,Calibri,system-ui",size:11},bargap:0.45};
   Plotly.react('chartCmpSBqx',[{type:'bar',x:labels,y:vals.map(v=>v.qx),marker:{color:colors},
-    text:vals.map(v=>v.qx!=null?v.qx.toFixed(5):''),textposition:'outside',cliponaxis:false}],
-    {...layout,yaxis:{title:'qx',tickformat:'.5f'}},{responsive:true});
+    text:vals.map(v=>v.qx!=null?v.qx.toFixed(5):''),textposition:'inside',cliponaxis:false,textfont:{color:'#fff',size:10}}],
+    {...layout,yaxis:{title:{text:'qx',font:{size:10}},tickformat:'.5f'}},{responsive:true});
   Plotly.react('chartCmpSBrenda',[{type:'bar',x:labels,y:vals.map(v=>v.renda_total),marker:{color:colors},
-    text:vals.map(v=>v.renda_total!=null?'R$ '+fmtBRL0(v.renda_total):''),textposition:'outside',cliponaxis:false}],
-    {...layout,yaxis:{title:'Renda Vitalícia Esperada (R$)'}},{responsive:true});
+    text:vals.map(v=>v.renda_total!=null?'R$ '+fmtBRL0(v.renda_total):''),textposition:'inside',cliponaxis:false,textfont:{color:'#fff',size:10}}],
+    {...layout,yaxis:{title:{text:'Renda Vitalícia (R$)',font:{size:10}}}},{responsive:true});
 
   const dexPct=vals[1].ex&&vals[2].ex?((vals[2].ex-vals[1].ex)/vals[1].ex*100).toFixed(2):null;
   document.getElementById('cmpSBInsight').innerHTML=`<strong>Leitura — ${labels[2]} vs ${labels[1]} (${sex==='M'?'Masculino':'Feminino'}, idade ${idade})</strong>`+
-    (dexPct!=null?`A tábua BR-EMSsb 2026 registra e<sub>${idade}</sub> = ${vals[2].ex?.toFixed(1)} anos, variação de <strong>${dexPct}%</strong> em relação à versão 2021 (${vals[1].ex?.toFixed(1)} anos). `+
+    (dexPct!=null?`A tábua BR-EMSsb 2026 registra e<sub>${idade}</sub> = ${vals[2].ex?.toFixed(1)} anos, variação de <strong>${dexPct}%</strong> em relação à versão 2021 (${vals[1].ex?.toFixed(1)} anos).<br>`+
     `Com renda mensal de R$ ${renda.toLocaleString('pt-BR')}, a renda vitalícia total esperada passa de <strong>R$ ${fmtBRL0(vals[1].renda_total)}</strong> para <strong>R$ ${fmtBRL0(vals[2].renda_total)}</strong>.`:'Dados não disponíveis para a idade selecionada.');
+}
+
+// ── INSIGHTS DE MERCADO ────────────────────────────────────────────────────
+function renderMercadoInsights(){
+  const el=document.getElementById('mktInsights');if(!el)return;
+  const e60m26=getEx('BR-EMSsb-2026-M',60)||0,e60f26=getEx('BR-EMSsb-2026-F',60)||0;
+  const e60m21=getEx('BR-EMSsb-2021-M',60)||0;
+  const qM26_65=getQx('BR-EMSsb-2026-M',65)||0,qM21_65=getQx('BR-EMSsb-2021-M',65)||0;
+  const dq=qM21_65>0?((qM26_65-qM21_65)/qM21_65*100).toFixed(1):null;
+  const at12=getQx('AT2012-Basica-M',65)||0;
+  const cpmd=getQx('CPM2014-M',70)||0,brd=getQx('BR-EMSsb-2026-M',70)||0;
+  el.innerHTML=`
+    <div class="insight-box"><strong>BR-EMS 2026 vs. 2021 — impacto em passivos de anuidade</strong>A BR-EMSsb 2026 registra qx₆₅ = ${qM26_65.toFixed(6)} (Masc.)${dq?', variação de '+dq+'% em relação à versão 2021 ('+qM21_65.toFixed(6)+')':''}. A expectativa de vida aos 60 anos passou de ${e60m21.toFixed(1)} para ${e60m26.toFixed(1)} anos (Masc.) e para ${e60f26.toFixed(1)} anos (Fem.), implicando ${e60m26>=e60m21?'aumento':'redução'} no passivo estimado para anuidades vitalícias.</div>
+    <div class="insight-box"><strong>AT-2012 é a tábua mais conservadora para anuidades</strong>Com qx₆₅ = ${at12.toFixed(6)}, a AT-2012 Básica apresenta a menor mortalidade masculina a 65 anos entre as tábuas analisadas — gerando os maiores fatores de anuidade (ä) e, portanto, o maior passivo estimado em concessões de benefício vitalício.</div>
+    <div class="insight-box"><strong>CPM-2014 torna-se mais conservadora que a BR-EMSsb 2026 acima de 70 anos</strong>Aos 70 anos, o CPM-2014 apresenta qx = ${cpmd.toFixed(6)} contra ${brd.toFixed(6)} da BR-EMSsb 2026 (Masc.) — o CPM projeta maior longevidade nessa faixa. Para planos com proporção relevante de assistidos acima de 70 anos, o CPM-2014 pode gerar passivo superior à nova BR-EMS.</div>
+    <div class="insight-box"><strong>Diferença M/F relevante para composição do grupo</strong>A diferença de expectativa de vida entre sexos aos 60 anos é de ${(e60f26-e60m26).toFixed(1)} anos (${e60m26.toFixed(1)}a M vs ${e60f26.toFixed(1)}a F). Planos com maior proporção feminina requerem premissas mais conservadoras e podem ter impacto relevante na migração entre tábuas.</div>`;
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────
 function refreshAll(){
-  renderVersoes();buildMktPills();renderMercado();
+  renderVersoes();buildMktPills();renderMercado();renderMercadoInsights();
   buildTqPills();renderTabelaQx();
-  calcExpectativa();
   buildImpRef();renderImpacto();
   renderCmpMT();renderCmpSB();
   buildBfSelects();calcBeneficios();
   calcGrupo();
-  buildMatPills();renderMatriz();
-  renderDashboard();
 }
 document.addEventListener('DOMContentLoaded',()=>{refreshAll();});
 
