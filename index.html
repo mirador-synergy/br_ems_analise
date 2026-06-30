@@ -358,7 +358,7 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
   <div class="section-inner">
     <div class="eyebrow">Seção 2 · Comparação</div>
     <h2 class="section-title">BR-EMS 2026 vs. tábuas de mercado</h2>
-    <p class="section-desc">Compare a BR-EMS 2026 com AT-2000, AT-2012, AT-83, CPM-2014, RP-2000 e UP-94. Ranking de conservadorismo para passivos previdenciários.</p>
+    <p class="section-desc">Compare a BR-EMS 2026 com AT-2000, AT-2012, AT-83, CPM-2014, RP-2000 e UP-94. Ranking de conservadorismo para passivos de anuidade/previdência — para passivos de seguro de vida, a leitura se inverte (ver detalhe abaixo e em Metodologia).</p>
     <div class="ctrl-row">
       <div class="ctrl-group">
         <span class="ctrl-label">Sexo</span>
@@ -379,9 +379,10 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
       <div class="card" style="height:100%">
         <div class="card-title">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-          Ranking · conservadorismo aos 65 anos
+          Ranking · conservadorismo aos 65 anos (anuidade/previdência)
         </div>
-        <p style="font-size:.72rem;color:var(--fg-3);margin-bottom:12px">Menor qx₆₅ = maior longevidade esperada = mais conservador para passivos de anuidade</p>
+        <p style="font-size:.72rem;color:var(--fg-3);margin-bottom:4px">Menor qx₆₅ = maior longevidade esperada = mais conservador para passivos de <strong>anuidade/previdência</strong> (paga o benefício por mais tempo).</p>
+        <p style="font-size:.72rem;color:var(--fg-3);margin-bottom:12px">Para passivos de <strong>seguro de vida</strong> (capital por morte), a lógica se inverte: <strong>maior</strong> qx₆₅ = mais conservador (maior probabilidade de sinistro).</p>
         <table class="rtable" id="rankTable"></table>
       </div>
     </div>
@@ -644,8 +645,13 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
       </div>
       <div class="meto-card c-navy">
         <div class="meto-icon">+</div>
-        <h3>Conservadorismo para pensões</h3>
-        <p>No contexto previdenciário, uma tábua mais <strong>conservadora</strong> é aquela que projeta <em>menor</em> mortalidade, portanto <em>maior</em> longevidade e maior passivo. A AT-2012, por exemplo, tende a ser mais conservadora que a AT-2000 — e ambas podem diferir da BR-EMS 2026. O estudo de aderência define qual tábua reflete melhor a experiência do seu plano.</p>
+        <h3>Conservadorismo para anuidades/previdência</h3>
+        <p>No contexto de <strong>anuidades e previdência</strong>, uma tábua mais <strong>conservadora</strong> é aquela que projeta <em>menor</em> mortalidade, portanto <em>maior</em> longevidade e maior passivo (paga o benefício por mais tempo). A AT-2012, por exemplo, tende a ser mais conservadora que a AT-2000 — e ambas podem diferir da BR-EMS 2026. O estudo de aderência define qual tábua reflete melhor a experiência do seu plano.</p>
+      </div>
+      <div class="meto-card c-red">
+        <div class="meto-icon">−</div>
+        <h3>Conservadorismo para seguros de vida</h3>
+        <p>Para <strong>seguro de vida</strong> (capital por morte), a lógica acima se <strong>inverte</strong>: uma tábua mais conservadora é aquela que projeta <em>maior</em> mortalidade, portanto maior prêmio puro de risco e maior reserva técnica esperada para sinistros. Nesse critério, a AT-2000 tende a ser mais conservadora que a AT-2012 — o oposto do que vale para anuidades. Ao usar a palavra "conservador" nesta página, sempre indicamos a qual tipo de passivo ela se refere.</p>
       </div>
       <div class="meto-card">
         <div class="meto-icon">∇</div>
@@ -923,7 +929,7 @@ function renderMercado(){
   rankData.sort((a,b)=>a.qx-b.qx);
   const maxQx=rankData[rankData.length-1]?.qx||1;
   const tEl=document.getElementById('rankTable');
-  tEl.innerHTML=`<thead><tr><th>#</th><th>Tábua</th><th>qx₆₅</th><th>e₆₅</th><th>Conserv.</th></tr></thead><tbody>${rankData.map((r,i)=>`<tr><td class="rnum">${i+1}</td><td>${getLabel(r.key)}</td><td style="font-family:var(--font-d);font-weight:700">${r.qx===999?'N/D':r.qx.toFixed(6)}</td><td>${r.ex?r.ex.toFixed(1)+'a':'N/D'}</td><td><div class="rbar-wrap"><div class="rbar" style="width:${(1-r.qx/maxQx)*100}%;background:${getColor(r.key)}"></div></div></td></tr>`).join('')}</tbody>`;
+  tEl.innerHTML=`<thead><tr><th>#</th><th>Tábua</th><th>qx₆₅</th><th>e₆₅</th><th title="Menor qx = mais conservador para anuidade/previdência. Para seguro de vida, a lógica se inverte.">Conserv. (anuidade)</th></tr></thead><tbody>${rankData.map((r,i)=>`<tr><td class="rnum">${i+1}</td><td>${getLabel(r.key)}</td><td style="font-family:var(--font-d);font-weight:700">${r.qx===999?'N/D':r.qx.toFixed(6)}</td><td>${r.ex?r.ex.toFixed(1)+'a':'N/D'}</td><td><div class="rbar-wrap"><div class="rbar" style="width:${(1-r.qx/maxQx)*100}%;background:${getColor(r.key)}"></div></div></td></tr>`).join('')}</tbody>`;
 }
 
 // ── SECTION 4: TABELA QX ─────────────────────────────────────────────────
@@ -1033,8 +1039,8 @@ function renderImpacto(){
   const minQx=res[0]||{qx:0,key:''},maxQx=res[res.length-1]||{qx:0,key:''};
   document.getElementById('kpiImpacto').innerHTML=`
     <div class="kpi"><div class="kpi-label">Referência: qx${age}</div><div class="kpi-value">${refQx.toFixed(5)}</div><div class="kpi-sub">${getLabel(refKey)}</div></div>
-    <div class="kpi c-sage"><div class="kpi-label">Menor qx${age} (+ conserv.)</div><div class="kpi-value">${minQx.qx.toFixed(5)}</div><div class="kpi-sub">${shortLabel(minQx.key)}</div></div>
-    <div class="kpi c-red"><div class="kpi-label">Maior qx${age}</div><div class="kpi-value">${maxQx.qx.toFixed(5)}</div><div class="kpi-sub">${shortLabel(maxQx.key)}</div></div>
+    <div class="kpi c-sage"><div class="kpi-label">Menor qx${age} (+ conserv. p/ anuidade)</div><div class="kpi-value">${minQx.qx.toFixed(5)}</div><div class="kpi-sub">${shortLabel(minQx.key)}</div></div>
+    <div class="kpi c-red"><div class="kpi-label">Maior qx${age} (+ conserv. p/ seguro)</div><div class="kpi-value">${maxQx.qx.toFixed(5)}</div><div class="kpi-sub">${shortLabel(maxQx.key)}</div></div>
     <div class="kpi c-ochre"><div class="kpi-label">e${age} · ${shortLabel(refKey)}</div><div class="kpi-value">${refEx.toFixed(1)}</div><div class="kpi-sub">anos · tábua de referência</div></div>`;
   document.getElementById('impQxHdr').textContent=`qx${age} — todas as tábuas (${S.impSex==='M'?'Masculino':'Feminino'})`;
   document.getElementById('impExHdr').textContent=`Expectativa de vida e${age} — referência: ${shortLabel(refKey)}`;
@@ -1050,7 +1056,7 @@ function renderImpacto(){
     const br26=res.find(r=>r.key===`BR-EMSsb-2026-${S.impSex}`)||res.find(r=>r.key.includes('2026'));
     const br26rank=br26?res.indexOf(br26)+1:null;
     let txt=`<strong>Comparativo — ${sexLbl}, ${age} anos</strong>`;
-    if(spread)txt+=`Entre as ${res.length} tábuas disponíveis, a amplitude de qx${age} é de ${spread}%: a <strong>${shortLabel(minQx.key)}</strong> registra a menor mortalidade (${minQx.qx.toFixed(5)}) — mais conservadora para anuidades — enquanto a <strong>${shortLabel(maxQx.key)}</strong> projeta a maior (${maxQx.qx.toFixed(5)}). `;
+    if(spread)txt+=`Entre as ${res.length} tábuas disponíveis, a amplitude de qx${age} é de ${spread}%: a <strong>${shortLabel(minQx.key)}</strong> registra a menor mortalidade (${minQx.qx.toFixed(5)}) — mais conservadora para passivos de <strong>anuidade/previdência</strong> — enquanto a <strong>${shortLabel(maxQx.key)}</strong> projeta a maior (${maxQx.qx.toFixed(5)}), sendo a mais conservadora para passivos de <strong>seguro de vida</strong>. `;
     if(br26&&br26rank)txt+=`A BR-EMSsb 2026 ocupa a ${br26rank}ª posição no ranking, com qx${age} = ${br26.qx.toFixed(5)}.`;
     impEl.innerHTML=txt;impEl.style.display='';
   }else if(impEl)impEl.style.display='none';
@@ -1374,8 +1380,8 @@ function renderMercadoInsights(){
   const cpmd=getQx('CPM2014-M',70)||0,brd=getQx('BR-EMSsb-2026-M',70)||0;
   el.innerHTML=`
     <div class="insight-box"><strong>BR-EMS 2026 vs. 2021 — impacto em passivos de anuidade</strong>A BR-EMSsb 2026 registra qx₆₅ = ${qM26_65.toFixed(6)} (Masc.)${dq?', variação de '+dq+'% em relação à versão 2021 ('+qM21_65.toFixed(6)+')':''}. A expectativa de vida aos 60 anos passou de ${e60m21.toFixed(1)} para ${e60m26.toFixed(1)} anos (Masc.) e para ${e60f26.toFixed(1)} anos (Fem.), implicando ${e60m26>=e60m21?'aumento':'redução'} no passivo estimado para anuidades vitalícias.</div>
-    <div class="insight-box"><strong>AT-2012 é a tábua mais conservadora para anuidades</strong>Com qx₆₅ = ${at12.toFixed(6)}, a AT-2012 Básica apresenta a menor mortalidade masculina a 65 anos entre as tábuas analisadas — gerando os maiores fatores de anuidade (ä) e, portanto, o maior passivo estimado em concessões de benefício vitalício.</div>
-    <div class="insight-box"><strong>CPM-2014 torna-se mais conservadora que a BR-EMSsb 2026 acima de 70 anos</strong>Aos 70 anos, o CPM-2014 apresenta qx = ${cpmd.toFixed(6)} contra ${brd.toFixed(6)} da BR-EMSsb 2026 (Masc.) — o CPM projeta maior longevidade nessa faixa. Para planos com proporção relevante de assistidos acima de 70 anos, o CPM-2014 pode gerar passivo superior à nova BR-EMS.</div>
+    <div class="insight-box"><strong>AT-2012 é a tábua mais conservadora para anuidades</strong>Com qx₆₅ = ${at12.toFixed(6)}, a AT-2012 Básica apresenta a menor mortalidade masculina a 65 anos entre as tábuas analisadas — gerando os maiores fatores de anuidade (ä) e, portanto, o maior passivo estimado em concessões de benefício vitalício. Para seguro de vida, seria a <em>menos</em> conservadora desse grupo, por projetar o menor sinistro esperado.</div>
+    <div class="insight-box"><strong>CPM-2014 torna-se mais conservadora para anuidades que a BR-EMSsb 2026 acima de 70 anos</strong>Aos 70 anos, o CPM-2014 apresenta qx = ${cpmd.toFixed(6)} contra ${brd.toFixed(6)} da BR-EMSsb 2026 (Masc.) — o CPM projeta maior longevidade nessa faixa. Para planos com proporção relevante de assistidos acima de 70 anos, o CPM-2014 pode gerar passivo superior à nova BR-EMS. (Para passivos de seguro de vida, vale a leitura inversa: maior qx = mais conservador.)</div>
     <div class="insight-box"><strong>Diferença M/F relevante para composição do grupo</strong>A diferença de expectativa de vida entre sexos aos 60 anos é de ${(e60f26-e60m26).toFixed(1)} anos (${e60m26.toFixed(1)}a M vs ${e60f26.toFixed(1)}a F). Planos com maior proporção feminina requerem premissas mais conservadoras e podem ter impacto relevante na migração entre tábuas.</div>`;
 }
 
