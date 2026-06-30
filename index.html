@@ -905,8 +905,9 @@ function renderMercado(){
   const ageRange=Array.from({length:71},(_,i)=>i+30);
   const traces=S.mktSel.filter(k=>TABUAS_DATA[k]).map(k=>{
     const isFem=k.endsWith('-F');
-    return {x:ageRange,y:ageRange.map(a=>getQx(k,a)||null),name:getLabel(k).replace(' (M)','').replace(' (F)',isFem?' (F)':''),type:'scatter',mode:'lines',line:{color:getColor(k),width:2.2,dash:isFem&&S.mSex==='both'?'dot':'solid'},hovertemplate:`<b>%{y:.6f}</b><extra>${getLabel(k)}</extra>`};
-  });
+    const isBrEms2026=TABUA_META[k]?.group==='BR-EMS'&&k.includes('2026');
+    return {x:ageRange,y:ageRange.map(a=>getQx(k,a)||null),name:getLabel(k).replace(' (M)','').replace(' (F)',isFem?' (F)':''),type:'scatter',mode:'lines',line:{color:getColor(k),width:isBrEms2026?3.6:1.8,dash:isFem&&S.mSex==='both'?'dot':'solid'},hovertemplate:`<b>%{y:.6f}</b><extra>${getLabel(k)}</extra>`};
+  }).sort((a,b)=>(a.line.width)-(b.line.width));
   plt('chartMercado',traces,{yaxis:{...PLY.yaxis,title:{text:'Probabilidade de óbito (qx)',font:{size:11}}},xaxis:{...PLY.xaxis,title:{text:'Idade',font:{size:11}}}});
 
   const refSex=S.mSex==='both'?'M':S.mSex;
