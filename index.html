@@ -248,7 +248,7 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
   </div>
   <div class="nav-right">
     <button class="btn-nav" onclick="dl2026()">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
       BR-EMS 2026
     </button>
     <button class="btn-nav" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.8)" onclick="document.getElementById('importSec').scrollIntoView({behavior:'smooth'})">
@@ -271,7 +271,7 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
     </div>
     <div class="hero-actions">
       <button class="btn-hero-dl" onclick="dl2026()">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
         Baixar BR-EMS 2026 (XLSX)
       </button>
     </div>
@@ -345,7 +345,7 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
     </div>
     <div class="chart-wrap"><div class="chart-hdr">Curva por versão — probabilidade de óbito (qx)</div><div id="chartVersoes" style="height:420px"></div></div>
     <div class="g2" style="margin-top:18px">
-      <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Diferença % vs. versão 2010</div><div id="chartVDiff" style="height:310px"></div></div>
+      <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Diferença % de qx vs. versão 2010 — probabilidade de óbito por idade</div><div id="chartVDiff" style="height:310px"></div></div>
       <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Heatmap qx — 2026 vs 2021</div><div id="chartVHeat" style="height:310px"></div></div>
     </div>
     <div class="kpi-grid" style="margin-top:20px" id="kpiVersoes"></div>
@@ -375,15 +375,15 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
     </div>
     <div class="chart-wrap"><div class="chart-hdr">Curvas de mortalidade (qx bruto) — idades 30 a 100</div><div id="chartMercado" style="height:420px"></div></div>
     <div class="g2" style="margin-top:18px">
-      <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Diferença % vs. BR-EMSsb 2026</div><div id="chartMktDiff" style="height:300px"></div></div>
-      <div class="card" style="height:100%">
-        <div class="card-title">
+      <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Diferença % de qx vs. BR-EMSsb 2026 — probabilidade de óbito por idade</div><div id="chartMktDiff" style="height:300px"></div></div>
+      <div class="card" style="height:100%;border-top:4px solid var(--mi-orange);box-shadow:var(--shadow-lg);background:var(--mi-orange-50)">
+        <div class="card-title" style="color:var(--mi-red);font-size:1rem">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
           Ranking · conservadorismo aos 65 anos (anuidade/previdência)
         </div>
         <p style="font-size:.72rem;color:var(--fg-3);margin-bottom:4px">Menor qx₆₅ = maior longevidade esperada = mais conservador para passivos de <strong>anuidade/previdência</strong> (paga o benefício por mais tempo).</p>
         <p style="font-size:.72rem;color:var(--fg-3);margin-bottom:12px">Para passivos de <strong>seguro de vida</strong> (capital por morte), a lógica se inverte: <strong>maior</strong> qx₆₅ = mais conservador (maior probabilidade de sinistro).</p>
-        <table class="rtable" id="rankTable"></table>
+        <table class="rtable" id="rankTable" style="background:#fff;border-radius:var(--r-sm);overflow:hidden"></table>
       </div>
     </div>
     <div id="mktInsights" style="margin-top:24px"></div>
@@ -417,9 +417,9 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
       </div>
       <div class="ctrl-group" style="align-self:flex-end;margin-left:auto">
         <div class="dl-btns">
-          <button class="btn-dl" onclick="dlCSV()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>CSV</button>
-          <button class="btn-dl" onclick="dlXLSX()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>XLSX</button>
-          <button class="btn-dl" onclick="dlJSON()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>JSON</button>
+          <button class="btn-dl" onclick="dlCSV()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>CSV</button>
+          <button class="btn-dl" onclick="dlXLSX()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>XLSX</button>
+          <button class="btn-dl" onclick="dlJSON()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>JSON</button>
         </div>
       </div>
     </div>
@@ -470,7 +470,7 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
   <div class="section-inner">
     <div class="eyebrow">Seção 5 · Impacto da Atualização</div>
     <h2 class="section-title">Comparação BR-EMS — 2015 / 2021 → 2026</h2>
-    <p class="section-desc">Avalie o impacto financeiro da atualização das tábuas sobre seguros de vida (BR-EMSmt) e previdência (BR-EMSsb). Analise o prêmio puro de risco ao longo das idades e os efeitos sobre renda vitalícia esperada.</p>
+    <p class="section-desc">Avalie o impacto financeiro da atualização das tábuas sobre seguros de vida (BR-EMSmt) e previdência (BR-EMSsb). Analise o prêmio de risco ao longo das idades e os efeitos sobre renda vitalícia esperada.</p>
     <div class="tab-bar">
       <button class="tab-btn active" id="cmpTabMT" onclick="setCmpTab('mt')">Seguros de Vida (Mortalidade — BR-EMSmt)</button>
       <button class="tab-btn" id="cmpTabSB" onclick="setCmpTab('sb')">Previdência (Sobrevivência — BR-EMSsb)</button>
@@ -497,7 +497,7 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
       </div>
       <div id="kpiCmpMT" class="kpi-grid" style="margin-bottom:22px"></div>
       <div class="g2">
-        <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Prêmio puro de risco por idade — R$ = qx × capital segurado</div><div id="chartCmpMTcurva" style="height:300px"></div></div>
+        <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Prêmio de risco por idade — R$ = qx × capital segurado</div><div id="chartCmpMTcurva" style="height:300px"></div></div>
         <div class="chart-wrap" style="margin-bottom:0"><div class="chart-hdr">Variação de qx — 2021 → 2026 (%) por idade</div><div id="chartCmpMTdelta" style="height:300px"></div></div>
       </div>
       <div class="insight-box" id="cmpMTInsight" style="margin-top:18px"></div>
@@ -651,7 +651,7 @@ body{font-family:var(--font-b);font-size:16px;line-height:1.5;color:var(--fg-1);
       <div class="meto-card c-red">
         <div class="meto-icon">−</div>
         <h3>Conservadorismo para seguros de vida</h3>
-        <p>Para <strong>seguro de vida</strong> (capital por morte), a lógica acima se <strong>inverte</strong>: uma tábua mais conservadora é aquela que projeta <em>maior</em> mortalidade, portanto maior prêmio puro de risco e maior reserva técnica esperada para sinistros. Nesse critério, a AT-2000 tende a ser mais conservadora que a AT-2012 — o oposto do que vale para anuidades. Ao usar a palavra "conservador" nesta página, sempre indicamos a qual tipo de passivo ela se refere.</p>
+        <p>Para <strong>seguro de vida</strong> (capital por morte), a lógica acima se <strong>inverte</strong>: uma tábua mais conservadora é aquela que projeta <em>maior</em> mortalidade, portanto maior prêmio de risco e maior reserva técnica esperada para sinistros. Nesse critério, a AT-2000 tende a ser mais conservadora que a AT-2012 — o oposto do que vale para anuidades. Ao usar a palavra "conservador" nesta página, sempre indicamos a qual tipo de passivo ela se refere.</p>
       </div>
       <div class="meto-card">
         <div class="meto-icon">∇</div>
@@ -844,7 +844,7 @@ function renderVersoes(){
     const a2=[],d2=[];agesDiff.forEach(a=>{const v=getQx(k,a),b=getQx(base10,a);if(v&&b&&b>0){a2.push(a);d2.push(((v-b)/b)*100);}});
     return {x:a2,y:d2,name:shortLabel(k),type:'scatter',mode:'lines',line:{color:getColor(k),width:2},hovertemplate:`%{y:.1f}%<extra>${shortLabel(k)}</extra>`};
   });
-  plt('chartVDiff',diffT,{yaxis:{...PLY.yaxis,title:{text:'Diferença % vs 2010',font:{size:11}}},xaxis:{...PLY.xaxis,title:{text:'Idade',font:{size:11}}},shapes:[{type:'line',x0:10,x1:100,y0:0,y1:0,line:{color:'#C7C7C7',dash:'dash',width:1}}],margin:{...PLY.margin}});
+  plt('chartVDiff',diffT,{yaxis:{...PLY.yaxis,title:{text:'Diferença % de qx vs. 2010',font:{size:11}}},xaxis:{...PLY.xaxis,title:{text:'Idade',font:{size:11}}},shapes:[{type:'line',x0:10,x1:100,y0:0,y1:0,line:{color:'#C7C7C7',dash:'dash',width:1}}],margin:{...PLY.margin}});
 
   // heatmap 2026 vs 2021
   const k26=`BR-EMS${S.vTipo}-2026-${refSex}`,k21=`BR-EMS${S.vTipo}-2021-${refSex}`;
@@ -871,7 +871,7 @@ function renderVersoes(){
       ex:`A <strong>expectativa de vida futura (ex)</strong> sintetiza o impacto cumulativo das premissas de mortalidade na tábua de <strong>${tipoLbl}</strong>. Aos 60 anos (${sexLbl}), a BR-EMS passa de e₆₀ = ${ex21.toFixed(1)} anos (2021) para ${ex26.toFixed(1)} anos (2026) — diferença de ${ex26>=ex21?'+':''}${(ex26-ex21).toFixed(1)} anos que impacta diretamente o passivo atuarial de anuidades vitalícias.`
     },
     mt:{
-      qx:`Na tábua de <strong>${tipoLbl}</strong>, o qx calibra diretamente o <strong>prêmio puro de risco</strong>: custo esperado de sinistro = qx × capital segurado. A comparação entre versões revela a tendência de revisão da mortalidade assumida pelo mercado segurador, impactando o preço dos seguros de vida individuais e em grupo.`,
+      qx:`Na tábua de <strong>${tipoLbl}</strong>, o qx calibra diretamente o <strong>prêmio de risco</strong>: custo esperado de sinistro = qx × capital segurado. A comparação entre versões revela a tendência de revisão da mortalidade assumida pelo mercado segurador, impactando o preço dos seguros de vida individuais e em grupo.`,
       lx:`O <strong>lx</strong> na tábua de <strong>${tipoLbl}</strong> descreve a curva de sobrevivência da carteira de segurados. Em análises de seguros em grupo, permite estimar quantos participantes permanecem expostos ao risco a cada idade — subsidiando o cálculo de reservas e projeções de sinistralidade futura.`,
       ex:`A <strong>expectativa de vida (ex)</strong> na tábua de <strong>${tipoLbl}</strong> indica o tempo médio de permanência de um segurado sob cobertura. Maior ex implica maior duração de exposição ao risco, com reflexo direto no dimensionamento de prêmios de longo prazo e fatores de desconto atuarial.`
     }
@@ -922,7 +922,7 @@ function renderMercado(){
     const a2=[],d2=[];ageRange.forEach(a=>{const v=getQx(k,a),b=getQx(ref,a);if(v&&b&&b>0){a2.push(a);d2.push(((v-b)/b)*100);}});
     return {x:a2,y:d2,name:getLabel(k).replace(' (M)','').replace(' (F)',' (F)'),type:'bar',marker:{color:getColor(k)},hovertemplate:`%{y:.1f}%<extra>${shortLabel(k)}</extra>`};
   });
-  plt('chartMktDiff',diffT,{barmode:'group',yaxis:{...PLY.yaxis,title:{text:'Dif. % vs BR-EMSsb 2026'}},xaxis:{...PLY.xaxis,title:{text:'Idade'}},margin:{...PLY.margin,b:50}});
+  plt('chartMktDiff',diffT,{barmode:'group',yaxis:{...PLY.yaxis,title:{text:'Dif. % de qx vs BR-EMSsb 2026'}},xaxis:{...PLY.xaxis,title:{text:'Idade'}},margin:{...PLY.margin,b:50}});
 
   const refAge=65;
   const rankData=S.mktSel.filter(k=>TABUAS_DATA[k]).map(k=>({key:k,qx:getQx(k,refAge)||999,ex:getEx(k,refAge)||0}));
@@ -1254,7 +1254,7 @@ function renderCmpMT(){
       <div class="kpi-value" style="font-size:1.25rem">${v.qx!=null?v.qx.toFixed(6):'—'}${i>0?_cmpDeltaTag(v.qx,ref15.qx,true):''}</div>
       <div class="kpi-sub">qx · prob. de morte no ano</div>
       <div style="margin-top:7px;font-size:.82rem;color:var(--fg-2)">e<sub>${idade}</sub> = <strong>${v.ex!=null?v.ex.toFixed(1):'—'}</strong> anos${i>0?_cmpDeltaTag(v.ex,ref15.ex,false):''}</div>
-      <div style="font-size:.82rem;color:var(--fg-2)">Prêmio puro: <strong>R$ ${fmtBRL(v.sinistro)}</strong>${i>0?_cmpDeltaTag(v.sinistro,ref15.sinistro,true):''}</div>
+      <div style="font-size:.82rem;color:var(--fg-2)">Prêmio de risco: <strong>R$ ${fmtBRL(v.sinistro)}</strong>${i>0?_cmpDeltaTag(v.sinistro,ref15.sinistro,true):''}</div>
     </div>`;
   }).join('')+`<div class="kpi c-navy">
     <div class="kpi-label">Δ Variação 2021 → 2026</div>
@@ -1264,7 +1264,7 @@ function renderCmpMT(){
     <div style="font-size:.82rem;color:var(--fg-2)">Δ e<sub>${idade}</sub>: <strong>${vals[1].ex&&vals[2].ex?((vals[2].ex-vals[1].ex)>=0?'+':'')+(vals[2].ex-vals[1].ex).toFixed(1)+' anos':'—'}</strong></div>
   </div>`;
 
-  // ── Curva de prêmio puro por idade (idades 18–80)
+  // ── Curva de prêmio de risco por idade (idades 18–80)
   const ageRange=Array.from({length:63},(_,i)=>i+18);
   const PLYbase={margin:{t:30,r:20,b:45,l:80},plot_bgcolor:'#fff',paper_bgcolor:'#fff',
     font:{family:'Carlito,Calibri,system-ui',size:11}};
@@ -1282,7 +1282,7 @@ function renderCmpMT(){
     ...PLYbase,showlegend:true,
     legend:{x:0.02,y:0.98,bgcolor:'rgba(255,255,255,.9)',bordercolor:'#eee',borderwidth:1},
     xaxis:{title:{text:'Idade'},zeroline:false,showgrid:true,gridcolor:'rgba(0,0,0,.05)'},
-    yaxis:{title:{text:'Prêmio puro (R$)'},zeroline:false,showgrid:true,gridcolor:'rgba(0,0,0,.05)'},
+    yaxis:{title:{text:'Prêmio de risco (R$)'},zeroline:false,showgrid:true,gridcolor:'rgba(0,0,0,.05)'},
     shapes:[vLine]
   },{responsive:true});
 
@@ -1312,7 +1312,7 @@ function renderCmpMT(){
     (dqPct!=null
       ?`A BR-EMSmt 2026 registra qx = ${vals[2].qx.toFixed(6)}, variação de <strong>${dqPct}%</strong> em relação à versão 2021 (${vals[1].qx.toFixed(6)}).<br>`
        +(queda
-         ?`Menor mortalidade implica <strong>menor prêmio puro de risco</strong>: sobre capital de R$ ${capital.toLocaleString('pt-BR')}, o custo de risco anual cai de R$ ${fmtBRL(vals[1].sinistro)} para <strong>R$ ${fmtBRL(vals[2].sinistro)}</strong>.<br>`
+         ?`Menor mortalidade implica <strong>menor prêmio de risco</strong>: sobre capital de R$ ${capital.toLocaleString('pt-BR')}, o custo de risco anual cai de R$ ${fmtBRL(vals[1].sinistro)} para <strong>R$ ${fmtBRL(vals[2].sinistro)}</strong>.<br>`
          :`Maior mortalidade implica <strong>prêmio maior</strong>: o custo de risco anual sobe de R$ ${fmtBRL(vals[1].sinistro)} para <strong>R$ ${fmtBRL(vals[2].sinistro)}</strong>.<br>`)
        +(peakDelta!=null?`Nas idades 18–80, a maior variação de qx ocorre aos <strong>${peakAge} anos</strong> (${peakDelta.toFixed(2)}%).<br>A linha pontilhada vertical marca a idade de referência selecionada.`:'')
       :'Dados não disponíveis para a idade selecionada.');
